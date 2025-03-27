@@ -25,5 +25,9 @@ struct Fonts {
         static func black(size: CGFloat) -> UIFont {
             UIFont(name: "Inter-Black", size: size)!
         }
+        
+        static func medium(size: CGFloat) -> UIFont {
+            UIFont(name: "Inter-Medium", size: size)!
+        }
     }
 }

@@ -8,18 +8,12 @@
 import UIKit
 
 final class SplashView: UIView {
-    lazy var waveView = makeWaveView()
+    lazy var container = makeContainer()
+    lazy var imageView = makeImageView()
     lazy var nameLabel = makeNameLabel()
     lazy var textLabel = makeTextLabel()
     lazy var preloader = makePreloader()
-    lazy var preloaderLabel = makeLabel()
-    lazy var imageView = makeImageView()
-    
-    private lazy var waveViewWidthConstraint = NSLayoutConstraint()
-    private lazy var waveViewHeightConstraint = NSLayoutConstraint()
-    
-    private lazy var imageViewWidthConstraint = NSLayoutConstraint()
-    private lazy var imageViewHeightConstraint = NSLayoutConstraint()
+    lazy var preloaderLabel = makePreloaderLabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,84 +27,45 @@ final class SplashView: UIView {
     }
 }
 
-// MARK: Public
-extension SplashView {
-    func wave() {
-        NSLayoutConstraint.deactivate([
-            waveViewWidthConstraint,
-            waveViewHeightConstraint
-        ])
-        
-        waveViewWidthConstraint.constant = 1000.scale
-        waveViewHeightConstraint.constant = 1000.scale
-        
-        NSLayoutConstraint.activate([
-            waveViewWidthConstraint,
-            waveViewHeightConstraint
-        ])
-        
-        UIView.animate(withDuration: 1, animations: { [weak self] in
-            self?.layoutIfNeeded()
-        })
-    }
-    
-    func compressImage(completion: @escaping () -> Void) {
-        NSLayoutConstraint.deactivate([
-            imageViewWidthConstraint,
-            imageViewHeightConstraint
-        ])
-        
-        imageViewWidthConstraint.constant = 100.scale
-        imageViewHeightConstraint.constant = 100.scale
-        
-        NSLayoutConstraint.activate([
-            imageViewWidthConstraint,
-            imageViewHeightConstraint
-        ])
-        
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
-            self?.waveView.backgroundColor = Appearance.main100
-            self?.layoutIfNeeded()
-        }, completion: { _ in
-            completion()
-        })
-    }
-}
-
 // MARK: Private
 private extension SplashView {
     func initialize() {
-        backgroundColor = Appearance.custom230_231_248
+        backgroundColor = Appearance.main100
     }
 }
 
 // MARK: Make constraints
 private extension SplashView {
     func makeConstraints() {
-        waveViewWidthConstraint = waveView.widthAnchor.constraint(equalToConstant: 0)
-        waveViewHeightConstraint = waveView.heightAnchor.constraint(equalToConstant: 0)
         NSLayoutConstraint.activate([
-            waveView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            waveView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            waveViewWidthConstraint,
-            waveViewHeightConstraint
+            container.leadingAnchor.constraint(equalTo: leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: trailingAnchor),
+            container.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.scale),
-            nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.scale),
-            nameLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -12.scale.scale)
+            imageView.widthAnchor.constraint(equalToConstant: 100.scale),
+            imageView.heightAnchor.constraint(equalToConstant: 100.scale),
+            imageView.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            imageView.topAnchor.constraint(equalTo: container.topAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            textLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.scale),
-            textLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.scale),
-            textLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8.scale)
+            nameLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16.scale),
+            nameLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16.scale),
+            nameLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 116.scale)
+        ])
+        
+        NSLayoutConstraint.activate([
+            textLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16.scale),
+            textLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16.scale),
+            textLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8.scale),
+            textLabel.bottomAnchor.constraint(equalTo: container.bottomAnchor)
         ])
         
         NSLayoutConstraint.activate([
             preloader.centerXAnchor.constraint(equalTo: centerXAnchor),
-            preloader.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 68.scale)
+            preloader.topAnchor.constraint(equalTo: container.bottomAnchor, constant: 68.scale)
         ])
         
         NSLayoutConstraint.activate([
@@ -118,25 +73,25 @@ private extension SplashView {
             preloaderLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.scale),
             preloaderLabel.topAnchor.constraint(equalTo: preloader.bottomAnchor, constant: 12.scale)
         ])
-        
-        imageViewWidthConstraint = imageView.widthAnchor.constraint(equalToConstant: 500.scale)
-        imageViewHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: 500.scale)
-        NSLayoutConstraint.activate([
-            imageViewWidthConstraint,
-            imageViewHeightConstraint,
-            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -100.scale)
-        ])
     }
 }
 
 // MARK: Lazy initialization
 private extension SplashView {
-    func makeWaveView() -> CircleView {
-        let view = CircleView()
-        view.backgroundColor = Appearance.custom230_231_248
+    func makeContainer() -> UIView {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
+        return view
+    }
+    
+    func makeImageView() -> UIImageView {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
+        view.image = UIImage(named: "Splash.Image")
+        view.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(view)
         return view
     }
     
@@ -151,46 +106,43 @@ private extension SplashView {
         let view = UILabel()
         view.attributedText = "Splash.Name".localized.attributed(with: attrs)
         view.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(view)
+        container.addSubview(view)
         return view
     }
     
     func makeTextLabel() -> UILabel {
         let attrs = TextAttributes()
             .textColor(Appearance.mono300)
-            .font(Fonts.Inter.regular(size: 19.scale))
-            .lineHeight(26.6.scale)
+            .font(Fonts.Inter.medium(size: 19.scale))
+            .lineHeight(27.scale)
             .letterSpacing(-0.44.scale)
             .textAlignment(.center)
         
         let view = UILabel()
         view.attributedText = "Splash.Text".localized.attributed(with: attrs)
         view.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(view)
+        container.addSubview(view)
         return view
     }
     
     func makePreloader() -> Spinner {
         let view = Spinner(size: CGSize(width: 32.scale, height: 32.scale))
+        view.startAnimating()
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         return view
     }
     
-    func makeLabel() -> UILabel {
+    func makePreloaderLabel() -> UILabel {
+        let attrs = TextAttributes()
+            .textColor(Appearance.mono300)
+            .font(Fonts.Inter.medium(size: 15.scale))
+            .lineHeight(23.scale)
+            .letterSpacing(-0.14.scale)
+            .textAlignment(.center)
+        
         let view = UILabel()
-        view.numberOfLines = 0
-        view.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(view)
-        return view
-    }
-    
-    func makeImageView() -> UIImageView {
-        let view = UIImageView()
-        view.layer.cornerRadius = 20.scale
-        view.layer.masksToBounds = true
-        view.image = UIImage(named: "Splash.Image")
-        view.contentMode = .scaleAspectFit
+        view.attributedText = "Splash.Preloader".localized.attributed(with: attrs)
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         return view

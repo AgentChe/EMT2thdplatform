@@ -125,20 +125,8 @@ extension ProfileManager {
                          title: "Onboarding.Exams.Exam1.Name".localized,
                          subTitle: "Onboarding.Exams.Exam1.Text".localized,
                          questionsCount: 10000,
-                         api: GlobalDefinitions.awsApiKey,
-                         domain: GlobalDefinitions.awsDomainUrl),
-                    Exam(code: "CompTIA",
-                         title: "Onboarding.Exams.Exam2.Name".localized,
-                         subTitle: "Onboarding.Exams.Exam2.Text".localized,
-                         questionsCount: 7500,
-                         api: GlobalDefinitions.comptiaApiKey,
-                         domain: GlobalDefinitions.comptiaDomainUrl),
-                    Exam(code: "ACMA",
-                         title: "Onboarding.Exams.Exam4.Name".localized,
-                         subTitle: "Onboarding.Exams.Exam4.Text".localized,
-                         questionsCount: 500,
-                         api: GlobalDefinitions.acmaApiKey,
-                         domain: GlobalDefinitions.acmaDomainUrl)
+                         api: GlobalDefinitions.apiKey,
+                         domain: GlobalDefinitions.domain)
                 ]
                 
                 event(.success(exams))
@@ -233,9 +221,11 @@ private extension ProfileManager {
     }
     
     func loadProfile() -> Single<Profile?> {
-        let request = GetProfileRequest(domain: GlobalDefinitions.awsDomainUrl,
-                                        apiKey: GlobalDefinitions.awsApiKey,
-                                        userToken: sessionManager.internalId)
+        let request = GetProfileRequest(
+            domain: GlobalDefinitions.domain,
+            apiKey: GlobalDefinitions.apiKey,
+            userToken: sessionManager.internalId
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)

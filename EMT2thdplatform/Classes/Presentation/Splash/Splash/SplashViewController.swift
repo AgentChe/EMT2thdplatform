@@ -17,8 +17,6 @@ final class SplashViewController: UIViewController {
     
     private lazy var disposeBag = DisposeBag()
     
-    private var wasAnimated = false
-    
     private lazy var sdkInitialize = SplashReceiptValidationObserver()
     
     private lazy var didSDKConfiguredTrigger = PublishRelay<Void>()
@@ -48,20 +46,6 @@ final class SplashViewController: UIViewController {
             self?.didSDKConfiguredTrigger.accept(Void())
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        guard !wasAnimated else {
-            return
-        }
-        
-        wasAnimated = true
-        
-        mainView.compressImage { [weak self] in
-            self?.mainView.wave()
-        }
-    }
 }
 
 // MARK: Make
@@ -74,20 +58,22 @@ extension SplashViewController {
 // MARK: Private
 private extension SplashViewController {
     func route(_ route: SplashViewModel.Route) {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) { [weak self] in
-            self?.goNext(route)
+        guard let window = UIApplication.shared.window else {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) { [weak self] in
+                self?.route(route)
+            }
+            
+            return
         }
-    }
-    
-    func goNext(_ route: SplashViewModel.Route) {
+        
         switch route {
         case .onboarding:
-            UIApplication.shared.keyWindow?.rootViewController = OnboardingViewController.make()
+            window.rootViewController = OnboardingViewController.make()
         case .main:
-            UIApplication.shared.keyWindow?.rootViewController = MainViewController.make()
+            window.rootViewController = MainViewController.make()
         case .paygateTransitionMain:
             let vc = PaygateViewController.make { [weak self] in
-                self?.goNext(.main)
+                self?.route(.main)
             }
             present(vc, animated: true)
         }

@@ -240,7 +240,6 @@
 		DEDD4E552D95364C00DC24F6 /* ReviewFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4C392D95364C00DC24F6 /* ReviewFilterView.swift */; };
 		DEDD4E562D95364C00DC24F6 /* PracticeDateOfExamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4C0F2D95364C00DC24F6 /* PracticeDateOfExamViewController.swift */; };
 		DEDD4E572D95364C00DC24F6 /* QuestionTableExplanationTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4CDA2D95364C00DC24F6 /* QuestionTableExplanationTitleCell.swift */; };
-		DEDD4E582D95364C00DC24F6 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4B9A2D95364C00DC24F6 /* ImagePicker.swift */; };
 		DEDD4E592D95364C00DC24F6 /* OExamsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4C832D95364C00DC24F6 /* OExamsView.swift */; };
 		DEDD4E5A2D95364C00DC24F6 /* DateOfExamView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4C1A2D95364C00DC24F6 /* DateOfExamView.swift */; };
 		DEDD4E5B2D95364C00DC24F6 /* PlanCurrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4BE32D95364C00DC24F6 /* PlanCurrent.swift */; };
@@ -355,6 +354,8 @@
 		DEDD4ED12D95365300DC24F6 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEDD4EC92D95365300DC24F6 /* Inter-SemiBold.ttf */; };
 		DEDD4ED22D95365300DC24F6 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEDD4EC72D95365300DC24F6 /* Inter-Bold.ttf */; };
 		DEDD4ED32D95365300DC24F6 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEDD4EC82D95365300DC24F6 /* Inter-Regular.ttf */; };
+		DEDD4ED52D953C1700DC24F6 /* Inter-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DEDD4ED42D953C1700DC24F6 /* Inter-Medium.otf */; };
+		DEDD4ED72D953FC900DC24F6 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4ED62D953FC900DC24F6 /* UIApplication+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -365,7 +366,6 @@
 		DEDD4B882D9534EF00DC24F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DEDD4B892D9534EF00DC24F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DEDD4B982D95364C00DC24F6 /* AmplitudeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmplitudeManager.swift; sourceTree = "<group>"; };
-		DEDD4B9A2D95364C00DC24F6 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		DEDD4B9B2D95364C00DC24F6 /* PaginatedDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedDataLoader.swift; sourceTree = "<group>"; };
 		DEDD4B9C2D95364C00DC24F6 /* RxActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxActivityIndicator.swift; sourceTree = "<group>"; };
 		DEDD4B9D2D95364C00DC24F6 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
@@ -709,6 +709,8 @@
 		DEDD4EC82D95365300DC24F6 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		DEDD4EC92D95365300DC24F6 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		DEDD4ECC2D95365300DC24F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DEDD4ED42D953C1700DC24F6 /* Inter-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.otf"; sourceTree = "<group>"; };
+		DEDD4ED62D953FC900DC24F6 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 		DFB88E306851BCCBD6C7043B /* Pods_EMT2thdplatform.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EMT2thdplatform.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -791,7 +793,6 @@
 		DEDD4B9E2D95364C00DC24F6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				DEDD4B9A2D95364C00DC24F6 /* ImagePicker.swift */,
 				DEDD4B9B2D95364C00DC24F6 /* PaginatedDataLoader.swift */,
 				DEDD4B9C2D95364C00DC24F6 /* RxActivityIndicator.swift */,
 				DEDD4B9D2D95364C00DC24F6 /* Toast.swift */,
@@ -835,6 +836,7 @@
 				DEDD4BB02D95364C00DC24F6 /* UIEdgeInsets+Extension.swift */,
 				DEDD4BB12D95364C00DC24F6 /* UITapGestureRecognizer+Extension.swift */,
 				DEDD4BB22D95364C00DC24F6 /* UIView+RxExtension.swift */,
+				DEDD4ED62D953FC900DC24F6 /* UIApplication+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1545,9 +1547,9 @@
 			isa = PBXGroup;
 			children = (
 				DEDD4CA12D95364C00DC24F6 /* Utils */,
-				DEDD4CA22D95364C00DC24F6 /* SplashView.swift */,
 				DEDD4CA32D95364C00DC24F6 /* SplashViewController.swift */,
 				DEDD4CA42D95364C00DC24F6 /* SplashViewModel.swift */,
+				DEDD4CA22D95364C00DC24F6 /* SplashView.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -2194,6 +2196,7 @@
 		DEDD4ECA2D95365300DC24F6 /* Inter */ = {
 			isa = PBXGroup;
 			children = (
+				DEDD4ED42D953C1700DC24F6 /* Inter-Medium.otf */,
 				DEDD4EC62D95365300DC24F6 /* Inter-Black.ttf */,
 				DEDD4EC72D95365300DC24F6 /* Inter-Bold.ttf */,
 				DEDD4EC82D95365300DC24F6 /* Inter-Regular.ttf */,
@@ -2286,6 +2289,7 @@
 				DEDD4ED32D95365300DC24F6 /* Inter-Regular.ttf in Resources */,
 				DEDD4B902D9534EF00DC24F6 /* Assets.xcassets in Resources */,
 				DEDD4D722D95364C00DC24F6 /* Onboarding.Start.json in Resources */,
+				DEDD4ED52D953C1700DC24F6 /* Inter-Medium.otf in Resources */,
 				DEDD4B922D9534EF00DC24F6 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2529,6 +2533,7 @@
 				DEDD4E2E2D95364C00DC24F6 /* OSlideView.swift in Sources */,
 				DEDD4E2F2D95364C00DC24F6 /* ExamEnvironment.swift in Sources */,
 				DEDD4E302D95364C00DC24F6 /* QuestionMapper.swift in Sources */,
+				DEDD4ED72D953FC900DC24F6 /* UIApplication+Extension.swift in Sources */,
 				DEDD4E312D95364C00DC24F6 /* PracticeViewModel.swift in Sources */,
 				DEDD4E322D95364C00DC24F6 /* TestStatsTableFilterCell.swift in Sources */,
 				DEDD4E332D95364C00DC24F6 /* ReviewTableSeparatorCell.swift in Sources */,
@@ -2568,7 +2573,6 @@
 				DEDD4E552D95364C00DC24F6 /* ReviewFilterView.swift in Sources */,
 				DEDD4E562D95364C00DC24F6 /* PracticeDateOfExamViewController.swift in Sources */,
 				DEDD4E572D95364C00DC24F6 /* QuestionTableExplanationTitleCell.swift in Sources */,
-				DEDD4E582D95364C00DC24F6 /* ImagePicker.swift in Sources */,
 				DEDD4E592D95364C00DC24F6 /* OExamsView.swift in Sources */,
 				DEDD4E5A2D95364C00DC24F6 /* DateOfExamView.swift in Sources */,
 				DEDD4E5B2D95364C00DC24F6 /* PlanCurrent.swift in Sources */,
@@ -2715,6 +2719,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EMT2thdplatform/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EMT;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -2749,6 +2754,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EMT2thdplatform/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = EMT;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

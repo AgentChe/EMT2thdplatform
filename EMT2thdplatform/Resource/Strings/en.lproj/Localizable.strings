@@ -11,17 +11,10 @@
 "Continue" = "Continue";
 "Next" = "Next";
 
-// MARK: ImagePicker
-"ImagePicker.TakePhoto" = "Take photo";
-"ImagePicker.CameraRoll" = "Camera roll";
-"ImagePicker.PhotoLibrary" = "Photo library";
-
 // MARK: Splash
-"Splash.Name" = "IT Exams";
-"Splash.Text" = "Personalized exam prep";
-"Splash.Preloader1" = "Checking your account...";
-"Splash.Preloader2" = "Syncing the question bank...";
-"Splash.Preloader3" = "Setting up your account...";
+"Splash.Name" = "EMT Exam";
+"Splash.Text" = "Personalized study prep";
+"Splash.Preloader" = "Creating account...";
 
 // MARK: Day of week
 "DayOfWeek.Short.Su" = "Su";
