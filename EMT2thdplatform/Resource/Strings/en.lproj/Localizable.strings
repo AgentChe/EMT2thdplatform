@@ -158,7 +158,7 @@
 "Courses.Current" = "Current";
 
 // MARK: TryAgain
-"TryAgain.Title" = "We've encountered a problem\nduring a request";
+"TryAgain.Title" = "The app failed to perform a request";
 "TryAgain.SubTitle" = "If there’s a connection issue on your side try one more time. If the connection is fine and the error keeps on repeating please get in touch with the support";
 "TryAgain.Button" = "Try again";
 "TryAgain.Contact" = "Contact the support";

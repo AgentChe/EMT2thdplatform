@@ -101,7 +101,7 @@ private extension TryAgainView {
     func makeSubTitleLabel() -> UILabel {
         let attrs = TextAttributes()
             .textColor(Appearance.mono300)
-            .font(Fonts.Inter.regular(size: 17.scale))
+            .font(Fonts.Inter.medium(size: 17.scale))
             .lineHeight(25.5.scale)
             .textAlignment(.center)
         

@@ -1848,8 +1848,8 @@
 		DEDD4D062D95364C00DC24F6 /* TryAgain */ = {
 			isa = PBXGroup;
 			children = (
-				DEDD4D042D95364C00DC24F6 /* TryAgainView.swift */,
 				DEDD4D052D95364C00DC24F6 /* TryAgainViewController.swift */,
+				DEDD4D042D95364C00DC24F6 /* TryAgainView.swift */,
 			);
 			path = TryAgain;
 			sourceTree = "<group>";
