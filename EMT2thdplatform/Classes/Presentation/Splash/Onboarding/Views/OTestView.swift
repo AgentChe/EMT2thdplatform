@@ -33,7 +33,6 @@ final class OTestView: OSlideView {
     
     private lazy var observableRetrySingle = ObservableRetrySingle()
     
-    private lazy var selectedExam = BehaviorRelay<Exam?>(value: nil)
     private lazy var selectedCourse = BehaviorRelay<Course?>(value: nil)
     private lazy var currentIndex = BehaviorRelay<Int?>(value: nil)
     
@@ -49,13 +48,6 @@ final class OTestView: OSlideView {
     }
 }
 
-// MARK: OExamsViewDelegate
-extension OTestView: OExamsViewDelegate {
-    func examsDidSelected(element: Exam) {
-        selectedExam.accept(element)
-    }
-}
-
 // MARK: OCourseViewDelegate
 extension OTestView: OCourseViewDelegate {
     func courseViewDidSelected(course: Course) {
@@ -68,31 +60,20 @@ private extension OTestView {
     func initialize() {
         backgroundColor = Appearance.main300
         
-        let exam = selectedExam
-            .compactMap { $0 }
-            .asDriver(onErrorDriveWith: .never())
-        
         let course = selectedCourse
             .compactMap { $0 }
             .asDriver(onErrorDriveWith: .never())
         
-        let index = currentIndex
-            .compactMap { $0 }
-            .asDriver(onErrorDriveWith: .never())
-        
-        Driver
-            .combineLatest(exam, course)
-            .flatMapLatest { [weak self] exam, course -> Driver<Test> in
-                guard let self = self else {
-                    return .never()
-                }
+        course
+            .flatMapLatest { [weak self] course -> Driver<Test> in
+                guard let self = self else { return .never() }
                 
                 func source() -> Single<Test> {
                     self.questionManager
-                        .obtainOnboardingTest(domain: exam.domain,
-                                              apiKey: exam.api,
-                                              courseId: course.id,
-                                              forceUpdate: true)
+                        .obtainOnboardingTest(
+                            courseId: course.id,
+                            forceUpdate: true
+                        )
                         .flatMap { test -> Single<Test> in
                             guard let test = test else {
                                 return .error(ContentError(.notContent))
@@ -107,8 +88,10 @@ private extension OTestView {
                 }
                 
                 return self.observableRetrySingle
-                    .retry(source: { source() },
-                           trigger: { trigger(error: $0) })
+                    .retry(
+                        source: { source() },
+                        trigger: { trigger(error: $0) }
+                    )
                     .trackActivity(self.activity)
                     .asDriver(onErrorDriveWith: .never())
             }
@@ -126,19 +109,16 @@ private extension OTestView {
             .disposed(by: disposeBag)
         
         favoriteButton.rx.tap
-            .withLatestFrom(selectedExam)
-            .flatMapFirst { [weak self] exam -> Observable<Bool> in
-                guard let self = self, let exam = exam else {
-                    return .empty()
-                }
+            .flatMapFirst { [weak self] void -> Observable<Bool> in
+                guard let self = self else { return .empty() }
                 
                 let isSaved = self.favoriteButton.isFavorite
                 let questionId = self.favoriteButton.question.id
                 
                 func source() -> Single<Bool> {
                     let request = isSaved
-                    ? self.questionManager.removeSavedQuestion(domain: exam.domain, apiKey: exam.api, questionId: questionId)
-                    : self.questionManager.saveQuestion(domain: exam.domain, apiKey: exam.api, questionId: questionId)
+                    ? self.questionManager.removeSavedQuestion(questionId: questionId)
+                    : self.questionManager.saveQuestion(questionId: questionId)
                     
                     return request
                         .map { !isSaved }
@@ -339,8 +319,8 @@ private extension OTestView {
         ])
         
         NSLayoutConstraint.activate([
-            favoriteButton.widthAnchor.constraint(equalToConstant: 12.scale),
-            favoriteButton.heightAnchor.constraint(equalToConstant: 18.scale),
+            favoriteButton.widthAnchor.constraint(equalToConstant: 24.scale),
+            favoriteButton.heightAnchor.constraint(equalToConstant: 24.scale),
             favoriteButton.centerYAnchor.constraint(equalTo: progressLabel.centerYAnchor),
             favoriteButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -23.scale)
         ])

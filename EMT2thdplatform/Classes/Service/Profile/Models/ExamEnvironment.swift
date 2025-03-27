@@ -6,6 +6,5 @@
 //
 
 struct ExamEnvironment: Codable, Hashable {
-    let exam: Exam
     let course: Course
 }

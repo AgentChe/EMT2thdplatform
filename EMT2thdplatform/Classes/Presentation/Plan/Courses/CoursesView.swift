@@ -89,7 +89,7 @@ private extension CoursesView {
             .letterSpacing(-0.44.scale)
         
         let view = UILabel()
-        view.attributedText = "Courses.TItle".localized.attributed(with: attrs)
+        view.attributedText = "Courses.Title".localized.attributed(with: attrs)
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         return view

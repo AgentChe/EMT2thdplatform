@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 
 final class CoursesViewController: UIViewController {
-    lazy var mainView = CoursesView()
+    private lazy var mainView = CoursesView()
     
     private lazy var viewModel = CoursesViewModel()
     
@@ -23,41 +23,29 @@ final class CoursesViewController: UIViewController {
         super.viewDidLoad()
         
         viewModel.tryAgain = { [weak self] error -> Observable<Void> in
-            guard let self = self else {
-                return .never()
-            }
-            
-            return self.openError()
+            self?.openError() ?? .never()
         }
         
-        viewModel.elements
-            .drive(onNext: { [weak self] elements in
-                self?.mainView.tableView.setup(elements: elements)
+        let output = viewModel.configure(input: CoursesViewModel.Input(
+            didTapCancel: mainView.cancelButton.rx.tap.asSignal(),
+            didTapSaveCourse: mainView.saveButton.rx.tap.asSignal()
+        ))
+        
+        output.route
+            .drive(Binder(self) { base, route in
+                base.route(route)
             })
             .disposed(by: disposeBag)
         
-        mainView.cancelButton.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.dismiss(animated: true)
+        output.activity
+            .drive(Binder(mainView.preloader) { base, activity in
+                activity ? base.startAnimating() : base.stopAnimating()
             })
             .disposed(by: disposeBag)
         
-        mainView.saveButton.rx.tap
-            .compactMap { [weak self] _ -> (Exam, Course)? in
-                self?.getSelected()
-            }
-            .bind(to: viewModel.save)
-            .disposed(by: disposeBag)
-        
-        viewModel.saved
-            .drive(Binder(self) { base, void in
-                base.dismiss(animated: true)
-            })
-            .disposed(by: disposeBag)
-        
-        viewModel.activity
-            .drive(Binder(self) { base, activity in
-                activity ? base.mainView.preloader.startAnimating() : base.mainView.preloader.stopAnimating()
+        output.elements
+            .drive(Binder(mainView.tableView) { base, elements in
+                base.setup(elements: elements)
             })
             .disposed(by: disposeBag)
     }
@@ -72,21 +60,11 @@ extension CoursesViewController {
 
 // MARK: Private
 private extension CoursesViewController {
-    func getSelected() -> (Exam, Course)? {
-        for i in 0...(mainView.tableView.elements.count - 1) {
-            let element = mainView.tableView.elements[i]
-            
-            switch element {
-            case .exam(let examElement):
-                if let courseElement = examElement.courses.first(where: { $0.isSelected }) {
-                    return (examElement.exam, courseElement.course)
-                }
-            default:
-                continue
-            }
+    func route(_ route: CoursesViewModel.Route) {
+        switch route {
+        case .dismiss:
+            dismiss(animated: true)
         }
-        
-        return nil
     }
     
     func openError() -> Observable<Void> {

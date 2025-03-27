@@ -9,13 +9,13 @@ import RxSwift
 import RxCocoa
 
 final class CoursesViewModel {
+    enum Route {
+        case dismiss
+    }
+    
     var tryAgain: ((Error) -> (Observable<Void>))?
     
-    lazy var save = PublishRelay<(Exam, Course)>()
-    
-    lazy var elements = makeElements()
-    lazy var saved = makeSaved()
-    lazy var activity = RxActivityIndicator()
+    private lazy var activity = RxActivityIndicator()
     
     private lazy var profileManager = ProfileManager()
     private lazy var coursesManager = CoursesManager()
@@ -23,144 +23,117 @@ final class CoursesViewModel {
     private lazy var observableRetrySingle = ObservableRetrySingle()
 }
 
+// MARK: Public
+extension CoursesViewModel {
+    struct Input {
+        let didTapCancel: Signal<Void>
+        let didTapSaveCourse: Signal<Void>
+    }
+    
+    struct Output {
+        let elements: Driver<[CoursesTableCourseElement]>
+        let activity: Driver<Bool>
+        let route: Driver<Route>
+    }
+    
+    func configure(input: Input) -> Output {
+        let elements = makeElements(
+            initialCurrentCourse: makeInitialCurrentCourse(),
+            allCourses: makeAllCourses()
+        )
+        
+        return Output(
+            elements: elements,
+            activity: activity.asDriver(),
+            route: makeRoute(
+                didTapCancel: input.didTapCancel,
+                didTapSaveCourse: input.didTapSaveCourse,
+                elements: elements
+            )
+        )
+    }
+}
+
 // MARK: Private
 private extension CoursesViewModel {
-    func makeElements() -> Driver<[CoursesTableElement]> {
-        let currentCourse = profileManager
+    func makeElements(
+        initialCurrentCourse: Driver<Course?>,
+        allCourses: Driver<[Course]>
+    ) -> Driver<[CoursesTableCourseElement]> {
+        Driver
+            .combineLatest(initialCurrentCourse, allCourses) { initialCurrentCourse, allCourses -> [CoursesTableCourseElement] in
+                allCourses.map { course -> CoursesTableCourseElement in
+                    CoursesTableCourseElement(
+                        course: course,
+                        isCurrent: course.id == initialCurrentCourse?.id,
+                        isSelected: course.id == initialCurrentCourse?.id
+                    )
+                }
+            }
+    }
+    
+    func makeInitialCurrentCourse() -> Driver<Course?> {
+        profileManager
             .obtainExamEnvironment()
             .map { $0?.course }
-            .asObservable()
+            .asDriver(onErrorDriveWith: .never())
+    }
+    
+    func makeAllCourses() -> Driver<[Course]> {
+        func source() -> Single<[Course]> {
+            coursesManager
+                .obtainCourses()
+        }
         
-        let zipped = profileManager.obtainExams()
-            .asObservable()
-            .flatMap { [weak self] exams -> Observable<[(Exam, [Course])]> in
-                guard let self = self else {
-                    return .never()
-                }
-                
-                func source() -> Single<[(Exam, [Course])]> {
-                    let zipped = exams.map { exam -> Single<(Exam, [Course])> in
-                        return self.coursesManager
-                            .obtainCourses(domain: exam.domain, apiKey: exam.api)
-                            .map { courses -> (Exam, [Course]) in
-                                (exam, courses)
-                            }
-                    }
-                    
-                    return Single.zip(zipped)
-                }
-                
-                func trigger(error: Error) -> Observable<Void> {
-                    guard let tryAgain = self.tryAgain?(error) else {
-                        return .empty()
-                    }
-                    
-                    return tryAgain
-                }
-                
-                return self.observableRetrySingle
-                    .retry(source: { source() },
-                           trigger: { trigger(error: $0) })
-                    .trackActivity(self.activity)
-            }
+        func trigger(error: Error) -> Observable<Void> {
+            tryAgain?(error) ?? .empty()
+        }
         
-        return Observable
-            .zip(currentCourse, zipped) { [weak self] currentCourse, zipped -> [CoursesTableElement] in
-                guard let self = self else {
-                    return []
-                }
-                
-                let currentID = currentCourse?.id ?? -1
-                
-                var result = [CoursesTableElement]()
-                
-                zipped.forEach { exam, courses in
-                    let group = self.makeGroup(exam: exam, courses: courses, currentCourseID: currentID)
-                    result.append(contentsOf: group)
-                }
-                
-                return result
-            }
+        return self.observableRetrySingle
+            .retry(
+                source: { source() },
+                trigger: { trigger(error: $0) }
+            )
+            .trackActivity(activity)
             .asDriver(onErrorJustReturn: [])
     }
     
-    func makeGroup(exam: Exam, courses: [Course], currentCourseID: Int) -> [CoursesTableElement] {
-        var result = [CoursesTableElement]()
+    func makeRoute(
+        didTapCancel: Signal<Void>,
+        didTapSaveCourse: Signal<Void>,
+        elements: Driver<[CoursesTableCourseElement]>
+    ) -> Driver<Route> {
+        let cancel = didTapCancel
+            .map { Route.dismiss }
+            .asDriver(onErrorDriveWith: .never())
         
-        let currentCourseInThisGroup = courses.contains(where: { $0.id == currentCourseID })
-        
-        let coursesElement = courses.map { course -> CoursesTableCourseElement in
-            let isCurrentCourse = course.id == currentCourseID
-            
-            return CoursesTableCourseElement(course: course,
-                                             isCurrent: isCurrentCourse,
-                                             isSelected: isCurrentCourse)
-        }
-        
-        let examElement = CoursesTableExamElement(exam: exam,
-                                                  courses: coursesElement,
-                                                  isOpened: currentCourseInThisGroup)
-        
-        result.append(.exam(examElement))
-        
-        if currentCourseInThisGroup {
-            coursesElement.enumerated().forEach { index, courseElement in
-                result.append(.offset(16.scale))
-                result.append(.course(courseElement))
+        let save = didTapSaveCourse
+            .withLatestFrom(elements)
+            .compactMap { elements -> Course? in
+                elements.first(where: { $0.isSelected })?.course
             }
-        }
-        
-        result.append(.offset(32.scale))
-        
-        return result
-    }
-    
-    func makeSaved() -> Driver<Void> {
-        save
-            .flatMapLatest { [weak self] exam, course -> Observable<Void> in
-                guard let self = self else {
-                    return .never()
-                }
+            .flatMapLatest { [weak self] course -> Driver<Route> in
+                guard let self else { return .never() }
                 
                 func source() -> Single<Void> {
-                    self.profileManager
-                        .obtainExams()
-                        .flatMap { [weak self] exams -> Single<Void> in
-                            guard let self = self else {
-                                return .never()
-                            }
-                            
-                            let requests = exams
-                                .map { environment -> Single<Void> in
-                                    if environment.code == exam.code {
-                                        return self.profileManager.set(domain: environment.domain,
-                                                                       apiKey: environment.api,
-                                                                       exam: exam,
-                                                                       course: course)
-                                    } else {
-                                        return self.profileManager.resetCourse(domain: environment.domain,
-                                                                               apiKey: environment.api)
-                                    }
-                                }
-                            
-                            return Single
-                                .zip(requests)
-                                .mapToVoid()
-                        }
+                    profileManager
+                        .set(course: course)
                 }
                 
                 func trigger(error: Error) -> Observable<Void> {
-                    guard let tryAgain = self.tryAgain?(error) else {
-                        return .empty()
-                    }
-                    
-                    return tryAgain
+                    tryAgain?(error) ?? .empty()
                 }
                 
                 return self.observableRetrySingle
-                    .retry(source: { source() },
-                           trigger: { trigger(error: $0) })
+                    .retry(
+                        source: { source() },
+                        trigger: { trigger(error: $0) }
+                    )
+                    .asDriver(onErrorDriveWith: .never())
+                    .map { Route.dismiss }
             }
-            .asDriver(onErrorDriveWith: .never())
+        
+        return Driver
+            .merge(cancel, save)
     }
 }

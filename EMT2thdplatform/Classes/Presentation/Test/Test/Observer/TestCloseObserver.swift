@@ -36,9 +36,7 @@ extension TestCloseObserver {
                 }
                 
                 return self.questionManager
-                    .finishTest(domain: element.domain,
-                                apiKey: element.apiKey,
-                                userTestId: element.userTestId)
+                    .finishTest(userTestId: element.userTestId)
                     .asSignal(onErrorSignalWith: .never())
             }
             .emit()

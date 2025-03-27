@@ -10,31 +10,26 @@ import Foundation
 struct OCombineData {
     let motivation: OMotivationElement
     let age: String
-    let exam: Exam
     let course: Course
     let examDate: Date?
     let studyMode: OStudyModeElement
     let testMinutes: Int
     let testDays: [DayOfWeek]
-    let pushToken: String?
 }
 
 final class OnboardingCombineData {
     private var motivation: OMotivationElement?
     private var age: String?
-    private var exam: Exam?
     private var course: Course?
     private var examDate: Date?
     private var studyMode: OStudyModeElement?
     private var testMinutes: Int?
     private var testDays: [DayOfWeek]?
-    private var pushToken: String?
     
     func combineData() -> OCombineData? {
         guard
             let motivation = motivation,
             let age = age,
-            let exam = exam,
             let course = course,
             let studyMode = studyMode,
             let testMinutes = testMinutes,
@@ -43,15 +38,15 @@ final class OnboardingCombineData {
             return nil
         }
         
-        return OCombineData(motivation: motivation,
-                            age: age,
-                            exam: exam,
-                            course: course,
-                            examDate: examDate,
-                            studyMode: studyMode,
-                            testMinutes: testMinutes,
-                            testDays: testDays,
-                            pushToken: pushToken)
+        return OCombineData(
+            motivation: motivation,
+            age: age,
+            course: course,
+            examDate: examDate,
+            studyMode: studyMode,
+            testMinutes: testMinutes,
+            testDays: testDays
+        )
     }
 }
 
@@ -66,13 +61,6 @@ extension OnboardingCombineData: OMotivationViewDelegate {
 extension OnboardingCombineData: OAgeViewDelegate {
     func ageViewDidSelected(age: String) {
         self.age = String(format: "Onboarding.CreatingPlanView.Years".localized, age)
-    }
-}
-
-// MARK: OExamsViewDelegate
-extension OnboardingCombineData: OExamsViewDelegate {
-    func examsDidSelected(element: Exam) {
-        exam = element
     }
 }
 
@@ -105,9 +93,5 @@ extension OnboardingCombineData: ODailyGoalViewDelegate {
     
     func dailyGoalDidSelected(daysOfWeek: [DayOfWeek]) {
         self.testDays = daysOfWeek
-    }
-    
-    func dailyGoalDidReceived(pushToken: String?) {
-        self.pushToken = pushToken
     }
 }

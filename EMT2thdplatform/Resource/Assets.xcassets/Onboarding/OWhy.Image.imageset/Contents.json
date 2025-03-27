@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "Frame 512528.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "Frame 512528@2x.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "Frame 512528@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "Frame 512528.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

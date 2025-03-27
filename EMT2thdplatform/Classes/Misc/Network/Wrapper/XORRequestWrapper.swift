@@ -9,7 +9,7 @@ import RxSwift
 import Alamofire
 
 final class XORRequestWrapper {
-    func callServerStringApi(requestBody: APIRequestBody, key: String) -> Single<Any> {
+    func callServerStringApi(requestBody: APIRequestBody, key: String = GlobalDefinitions.apiKey) -> Single<Any> {
         execute(request: requestBody, key: key)
     }
 }

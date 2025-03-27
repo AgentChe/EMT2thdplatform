@@ -15,7 +15,7 @@ final class PlanViewModel {
     
     lazy var stepContent = makeStepContent()
     lazy var planSteps = makePlanSteps()
-    lazy var planCurrent = makePlanCurrent()
+    lazy var currentCourse = makeCurrentCourse()
     lazy var planStudyScore = makePlanStudyScore()
     
     lazy var activity = RxActivityIndicator()
@@ -58,9 +58,9 @@ private extension PlanViewModel {
         }
     }
     
-    func makePlanCurrent() -> Driver<PlanCurrent> {
+    func makeCurrentCourse() -> Driver<Course> {
         examEnvironment.map {
-            PlanCurrent(exam: $0.exam, course: $0.course)
+            $0.course
         }
     }
     
@@ -94,9 +94,7 @@ private extension PlanViewModel {
                     return triggers
                         .flatMapLatest {
                             self.planManager
-                                .obtainPlan(domain: examEnvironment.exam.domain,
-                                            apiKey: examEnvironment.exam.api,
-                                            courseId: examEnvironment.course.id)
+                                .obtainPlan(courseId: examEnvironment.course.id)
                                 .flatMap { plan -> Single<Plan> in
                                     guard let plan = plan else {
                                         return .error(ContentError(.notContent))

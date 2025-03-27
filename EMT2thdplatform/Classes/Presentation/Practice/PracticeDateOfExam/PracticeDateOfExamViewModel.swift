@@ -39,24 +39,7 @@ private extension PracticeDateOfExamViewModel {
                 }
                 
                 func source() -> Single<Void> {
-                    self.profileManager
-                        .obtainExams()
-                        .flatMap { [weak self] exams -> Single<Void> in
-                            guard let self = self else {
-                                return .never()
-                            }
-                            
-                            let requests = exams
-                                .map { exam -> Single<Void> in
-                                    self.profileManager.set(domain: exam.domain,
-                                                            apiKey: exam.api,
-                                                            examDate: date)
-                                }
-                            
-                            return Single
-                                .zip(requests)
-                                .mapToVoid()
-                        }
+                    profileManager.set(examDate: date)
                 }
                 
                 func trigger(error: Error) -> Observable<Void> {

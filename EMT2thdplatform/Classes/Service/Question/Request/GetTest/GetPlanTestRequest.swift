@@ -8,14 +8,12 @@
 import Alamofire
 
 struct GetPlanTestRequest: APIRequestBody {
-    let domain: String
-    let apiKey: String
     let userToken: String
     let testId: Int
     let activeSubscription: Bool
     
     var url: String {
-        domain + "/api/plan/test"
+        GlobalDefinitions.domain + "/api/plan/test"
     }
     
     var method: HTTPMethod {
@@ -24,7 +22,7 @@ struct GetPlanTestRequest: APIRequestBody {
     
     var parameters: Parameters? {
          [
-            "_api_key": apiKey,
+            "_api_key": GlobalDefinitions.apiKey,
             "_user_token": userToken,
             "id": testId,
             "user_is_premium": activeSubscription,

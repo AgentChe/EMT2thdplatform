@@ -61,10 +61,9 @@ final class PlanViewController: UIViewController {
             })
             .disposed(by: disposeBag)
         
-        viewModel.planCurrent
-            .drive(Binder(self) { base, current in
-                base.mainView.headerView.currentView.setup(exam: current.exam,
-                                                           course: current.course)
+        viewModel.currentCourse
+            .drive(Binder(mainView.headerView.currentView) { base, course in
+                base.setup(course: course)
             })
             .disposed(by: disposeBag)
 

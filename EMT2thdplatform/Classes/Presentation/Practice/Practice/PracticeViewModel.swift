@@ -113,11 +113,11 @@ private extension PracticeViewModel {
                 
                 func source() -> Single<String?> {
                     self.questionManager
-                        .obtainQotdTest(domain: examEnvironment.exam.domain,
-                                        apiKey: examEnvironment.exam.api,
-                                        courseId: examEnvironment.course.id,
-                                        activeSubscription: false,
-                                        forceUpdate: false)
+                        .obtainQotdTest(
+                            courseId: examEnvironment.course.id,
+                            activeSubscription: false,
+                            forceUpdate: false
+                        )
                         .map { qotdTest -> String? in
                             qotdTest?.test.questions.first?.question
                         }
@@ -153,9 +153,7 @@ private extension PracticeViewModel {
                 
                 func source() -> Single<TestsKit?> {
                     self.questionManager
-                        .obtainTestsKit(domain: examEnvironment.exam.domain,
-                                        apiKey: examEnvironment.exam.api,
-                                        courseId: examEnvironment.course.id)
+                        .obtainTestsKit(courseId: examEnvironment.course.id)
                 }
                 
                 func trigger(error: Error) -> Observable<Void> {
@@ -192,7 +190,7 @@ private extension PracticeViewModel {
                     return nil
                 }
                 
-                return examEnvironment.exam.questionsCount
+                return 5000
             }
     }
     

@@ -63,8 +63,7 @@ private extension OCreatingPlanView {
         let personalDataSectionView = OCreatingPlanSectionView(title: "Onboarding.CreatingPlanView.Section2".localized,
                                                                rows: [data.age])
         let examDetailsSectionView = OCreatingPlanSectionView(title: "Onboarding.CreatingPlanView.Section3".localized,
-                                                              rows: [data.exam.title,
-                                                                     data.course.name,
+                                                              rows: [data.course.name,
                                                                      examDateFormatted(data.examDate)
                                                                     ].compactMap { $0 })
         let studyPreferences = OCreatingPlanSectionView(title: "Onboarding.CreatingPlanView.Section4".localized,

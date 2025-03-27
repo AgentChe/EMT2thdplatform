@@ -8,30 +8,30 @@
 import RxSwift
 
 protocol QuestionManagerProtocol {
-    func obtainTestsKit(domain: String, apiKey: String, courseId: Int) -> Single<TestsKit?>
-    func obtainTest(domain: String, apiKey: String, courseId: Int, testId: Int?, time: Int?, activeSubscription: Bool) -> Single<Test?>
-    func obtainTenTest(domain: String, apiKey: String, courseId: Int, activeSubscription: Bool) -> Single<Test?>
-    func obtainFailedTest(domain: String, apiKey: String, courseId: Int, activeSubscription: Bool) -> Single<Test?>
-    func obtainQotdTest(domain: String, apiKey: String, courseId: Int, activeSubscription: Bool, forceUpdate: Bool) -> Single<QotdTest?>
-    func obtainRandomTest(domain: String, apiKey: String, courseId: Int, activeSubscription: Bool) -> Single<Test?>
-    func obtainSavedTest(domain: String, apiKey: String, courseId: Int, activeSubscription: Bool) -> Single<Test?>
-    func obtainQuickTest(domain: String, apiKey: String, courseId: Int, activeSubscription: Bool) -> Single<Test?>
-    func obtainCustomTest(domain: String,
-                          apiKey: String,
-                          courseId: Int,
-                          activeSubscription: Bool,
-                          subjectsIds: [Int],
-                          includeMissedQuestions: Bool,
-                          includeAnsweredQuestions: Bool,
-                          questionsCount: Int) -> Single<Test?>
-    func obtainPlanTest(domain: String, apiKey: String, testId: Int, activeSubscription: Bool) -> Single<Test?>
-    func obtainOnboardingTest(domain: String, apiKey: String, courseId: Int, forceUpdate: Bool) -> Single<Test?>
-    func obtainReview(domain: String, apiKey: String, courseId: Int, mode: Int, offset: Int) -> Single<[Review]>
-    func saveQuestion(domain: String, apiKey: String, questionId: Int) -> Single<Void>
-    func removeSavedQuestion(domain: String, apiKey: String, questionId: Int) -> Single<Void>
-    func obtainAgainTest(domain: String, apiKey: String, userTestId: Int) -> Single<Test?>
-    func finishTest(domain: String, apiKey: String, userTestId: Int) -> Single<Void>
-    func sendAnswer(domain: String, apiKey: String, questionId: Int, userTestId: Int, answerIds: [Int]) -> Single<Bool?>
+    func obtainTestsKit(courseId: Int) -> Single<TestsKit?>
+    func obtainTest(courseId: Int, testId: Int?, time: Int?, activeSubscription: Bool) -> Single<Test?>
+    func obtainTenTest(courseId: Int, activeSubscription: Bool) -> Single<Test?>
+    func obtainFailedTest(courseId: Int, activeSubscription: Bool) -> Single<Test?>
+    func obtainQotdTest(courseId: Int, activeSubscription: Bool, forceUpdate: Bool) -> Single<QotdTest?>
+    func obtainRandomTest(courseId: Int, activeSubscription: Bool) -> Single<Test?>
+    func obtainSavedTest(courseId: Int, activeSubscription: Bool) -> Single<Test?>
+    func obtainQuickTest(courseId: Int, activeSubscription: Bool) -> Single<Test?>
+    func obtainCustomTest(
+        courseId: Int,
+        activeSubscription: Bool,
+        subjectsIds: [Int],
+        includeMissedQuestions: Bool,
+        includeAnsweredQuestions: Bool,
+        questionsCount: Int
+    ) -> Single<Test?>
+    func obtainPlanTest(testId: Int, activeSubscription: Bool) -> Single<Test?>
+    func obtainOnboardingTest(courseId: Int, forceUpdate: Bool) -> Single<Test?>
+    func obtainReview(courseId: Int, mode: Int, offset: Int) -> Single<[Review]>
+    func saveQuestion(questionId: Int) -> Single<Void>
+    func removeSavedQuestion(questionId: Int) -> Single<Void>
+    func obtainAgainTest(userTestId: Int) -> Single<Test?>
+    func finishTest(userTestId: Int) -> Single<Void>
+    func sendAnswer(questionId: Int, userTestId: Int, answerIds: [Int]) -> Single<Bool?>
 }
 
 final class QuestionManager: QuestionManagerProtocol {
@@ -50,62 +50,62 @@ final class QuestionManager: QuestionManagerProtocol {
 
 // MARK: Public
 extension QuestionManager {
-    func obtainTestsKit(domain: String, apiKey: String, courseId: Int) -> Single<TestsKit?> {
-        let request = GetTestsKitRequest(domain: domain,
-                                         apiKey: apiKey,
-                                         userToken: sessionManager.internalId,
-                                         courseId: courseId)
+    func obtainTestsKit(courseId: Int) -> Single<TestsKit?> {
+        let request = GetTestsKitRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .map { GetTestsKitResponse.map(from: $0) }
     }
     
-    func obtainTest(domain: String, apiKey: String, courseId: Int, testId: Int?, time: Int?, activeSubscription: Bool) -> Single<Test?> {
-        let request = GetTestRequest(domain: domain,
-                                     apiKey: apiKey,
-                                     userToken: sessionManager.internalId,
-                                     courseId: courseId,
-                                     testId: testId,
-                                     time: time,
-                                     activeSubscription: activeSubscription)
+    func obtainTest(courseId: Int, testId: Int?, time: Int?, activeSubscription: Bool) -> Single<Test?> {
+        let request = GetTestRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId,
+            testId: testId,
+            time: time,
+            activeSubscription: activeSubscription
+        )
         
         return xorRequestWrapper
-            .callServerStringApi(requestBody: request, key: apiKey)
-            .map { GetTestResponseMapper.map(from: $0, key: apiKey) }
+            .callServerStringApi(requestBody: request, key: GlobalDefinitions.apiKey)
+            .map { GetTestResponseMapper.map(from: $0, key: GlobalDefinitions.apiKey) }
     }
     
-    func obtainTenTest(domain: String, apiKey: String, courseId: Int, activeSubscription: Bool) -> Single<Test?> {
-        let request = GetTenTestRequest(domain: domain,
-                                        apiKey: apiKey,
-                                        userToken: sessionManager.internalId,
-                                        courseId: courseId,
-                                        activeSubscription: activeSubscription)
+    func obtainTenTest(courseId: Int, activeSubscription: Bool) -> Single<Test?> {
+        let request = GetTenTestRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId,
+            activeSubscription: activeSubscription
+        )
         
         return xorRequestWrapper
-            .callServerStringApi(requestBody: request, key: apiKey)
-            .map { GetTestResponseMapper.map(from: $0, key: apiKey) }
+            .callServerStringApi(requestBody: request, key: GlobalDefinitions.apiKey)
+            .map { GetTestResponseMapper.map(from: $0, key: GlobalDefinitions.apiKey) }
     }
     
-    func obtainFailedTest(domain: String, apiKey: String, courseId: Int, activeSubscription: Bool) -> Single<Test?> {
-        let request = GetFailedTestRequest(domain: domain,
-                                           apiKey: apiKey,
-                                           userToken: sessionManager.internalId,
-                                           courseId: courseId,
-                                           activeSubscription: activeSubscription)
+    func obtainFailedTest(courseId: Int, activeSubscription: Bool) -> Single<Test?> {
+        let request = GetFailedTestRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId,
+            activeSubscription: activeSubscription
+        )
         
         return xorRequestWrapper
-            .callServerStringApi(requestBody: request, key: apiKey)
-            .map { GetTestResponseMapper.map(from: $0, key: apiKey) }
+            .callServerStringApi(requestBody: request, key: GlobalDefinitions.apiKey)
+            .map { GetTestResponseMapper.map(from: $0, key: GlobalDefinitions.apiKey) }
     }
     
-    func obtainQotdTest(domain: String,
-                        apiKey: String,
-                        courseId: Int,
-                        activeSubscription: Bool,
-                        forceUpdate: Bool) -> Single<QotdTest?> {
+    func obtainQotdTest(
+        courseId: Int,
+        activeSubscription: Bool,
+        forceUpdate: Bool
+    ) -> Single<QotdTest?> {
         if forceUpdate {
-            return loadQotdTest(domain: domain, apiKey: apiKey, courseId: courseId, activeSubscription: activeSubscription)
+            return loadQotdTest(courseId: courseId, activeSubscription: activeSubscription)
         }
         
         return cachedQotdTest(courseId: courseId)
@@ -118,153 +118,153 @@ extension QuestionManager {
                     return .just(test)
                 }
                 
-                return self.loadQotdTest(domain: domain, apiKey: apiKey, courseId: courseId, activeSubscription: activeSubscription)
+                return self.loadQotdTest(courseId: courseId, activeSubscription: activeSubscription)
             }
     }
     
-    func obtainRandomTest(domain: String, apiKey: String, courseId: Int, activeSubscription: Bool) -> Single<Test?> {
-        let request = GetRandomTestRequest(domain: domain,
-                                           apiKey: apiKey,
-                                           userToken: sessionManager.internalId,
-                                           courseId: courseId,
-                                           activeSubscription: activeSubscription)
+    func obtainRandomTest(courseId: Int, activeSubscription: Bool) -> Single<Test?> {
+        let request = GetRandomTestRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId,
+            activeSubscription: activeSubscription
+        )
         
         return xorRequestWrapper
-            .callServerStringApi(requestBody: request, key: apiKey)
-            .map { GetTestResponseMapper.map(from: $0, key: apiKey) }
+            .callServerStringApi(requestBody: request, key: GlobalDefinitions.apiKey)
+            .map { GetTestResponseMapper.map(from: $0, key: GlobalDefinitions.apiKey) }
     }
     
-    func obtainSavedTest(domain: String, apiKey: String, courseId: Int, activeSubscription: Bool) -> Single<Test?> {
-        let request = GetSavedTestRequest(domain: domain,
-                                          apiKey: apiKey,
-                                          userToken: sessionManager.internalId,
-                                          courseId: courseId,
-                                          activeSubscription: activeSubscription)
+    func obtainSavedTest(courseId: Int, activeSubscription: Bool) -> Single<Test?> {
+        let request = GetSavedTestRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId,
+            activeSubscription: activeSubscription
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .map { GetTestResponseMapper.map(from: $0) }
     }
     
-    func obtainQuickTest(domain: String, apiKey: String, courseId: Int, activeSubscription: Bool) -> Single<Test?> {
-        let request = GetCustomTestRequest(domain: domain,
-                                           apiKey: apiKey,
-                                           userToken: sessionManager.internalId,
-                                           courseId: courseId,
-                                           activeSubscription: activeSubscription,
-                                           subjects: [],
-                                           includeMissedQuestions: true,
-                                           includeAnsweredQuestions: true,
-                                           questionsCount: 10)
+    func obtainQuickTest(courseId: Int, activeSubscription: Bool) -> Single<Test?> {
+        let request = GetCustomTestRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId,
+            activeSubscription: activeSubscription,
+            subjects: [],
+            includeMissedQuestions: true,
+            includeAnsweredQuestions: true,
+            questionsCount: 10
+        )
         
         return xorRequestWrapper
-            .callServerStringApi(requestBody: request, key: apiKey)
-            .map { GetTestResponseMapper.map(from: $0, key: apiKey) }
+            .callServerStringApi(requestBody: request, key: GlobalDefinitions.apiKey)
+            .map { GetTestResponseMapper.map(from: $0, key: GlobalDefinitions.apiKey) }
     }
     
-    func obtainCustomTest(domain: String,
-                          apiKey: String,
-                          courseId: Int,
-                          activeSubscription: Bool,
-                          subjectsIds: [Int],
-                          includeMissedQuestions: Bool,
-                          includeAnsweredQuestions: Bool,
-                          questionsCount: Int) -> Single<Test?> {
-        let request = GetCustomTestRequest(domain: domain,
-                                           apiKey: apiKey,
-                                           userToken: sessionManager.internalId,
-                                           courseId: courseId,
-                                           activeSubscription: activeSubscription,
-                                           subjects: subjectsIds,
-                                           includeMissedQuestions: includeMissedQuestions,
-                                           includeAnsweredQuestions: includeAnsweredQuestions,
-                                           questionsCount: questionsCount)
+    func obtainCustomTest(
+        courseId: Int,
+        activeSubscription: Bool,
+        subjectsIds: [Int],
+        includeMissedQuestions: Bool,
+        includeAnsweredQuestions: Bool,
+        questionsCount: Int
+    ) -> Single<Test?> {
+        let request = GetCustomTestRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId,
+            activeSubscription: activeSubscription,
+            subjects: subjectsIds,
+            includeMissedQuestions: includeMissedQuestions,
+            includeAnsweredQuestions: includeAnsweredQuestions,
+            questionsCount: questionsCount
+        )
         
         return xorRequestWrapper
-            .callServerStringApi(requestBody: request, key: apiKey)
-            .map { GetTestResponseMapper.map(from: $0, key: apiKey) }
+            .callServerStringApi(requestBody: request, key: GlobalDefinitions.apiKey)
+            .map { GetTestResponseMapper.map(from: $0, key: GlobalDefinitions.apiKey) }
     }
     
-    func obtainPlanTest(domain: String, apiKey: String, testId: Int, activeSubscription: Bool) -> Single<Test?> {
-        let request = GetPlanTestRequest(domain: domain,
-                                         apiKey: apiKey,
-                                         userToken: sessionManager.internalId,
-                                         testId: testId,
-                                         activeSubscription: activeSubscription)
+    func obtainPlanTest(testId: Int, activeSubscription: Bool) -> Single<Test?> {
+        let request = GetPlanTestRequest(
+            userToken: sessionManager.internalId,
+            testId: testId,
+            activeSubscription: activeSubscription
+        )
         
         return xorRequestWrapper
-            .callServerStringApi(requestBody: request, key: apiKey)
-            .map { GetTestResponseMapper.map(from: $0, key: apiKey) }
+            .callServerStringApi(requestBody: request, key: GlobalDefinitions.apiKey)
+            .map { GetTestResponseMapper.map(from: $0, key: GlobalDefinitions.apiKey) }
     }
     
-    func obtainOnboardingTest(domain: String, apiKey: String, courseId: Int, forceUpdate: Bool) -> Single<Test?> {
-        forceUpdate ? loadOnboardingTest(domain: domain, apiKey: apiKey, courseId: courseId) : cachedOnboardingTest()
+    func obtainOnboardingTest(courseId: Int, forceUpdate: Bool) -> Single<Test?> {
+        forceUpdate ? loadOnboardingTest(courseId: courseId) : cachedOnboardingTest()
     }
     
-    func obtainReview(domain: String, apiKey: String, courseId: Int, mode: Int, offset: Int) -> Single<[Review]> {
-        let request = GetReviewRequest(domain: domain,
-                                       apiKey: apiKey,
-                                       userToken: sessionManager.internalId,
-                                       courseId: courseId,
-                                       mode: mode,
-                                       offset: offset)
+    func obtainReview(courseId: Int, mode: Int, offset: Int) -> Single<[Review]> {
+        let request = GetReviewRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId,
+            mode: mode,
+            offset: offset
+        )
         
         return xorRequestWrapper
-            .callServerStringApi(requestBody: request, key: apiKey)
-            .map { GetReviewResponse.map(from: $0, key: apiKey) }
+            .callServerStringApi(requestBody: request, key: GlobalDefinitions.apiKey)
+            .map { GetReviewResponse.map(from: $0, key: GlobalDefinitions.apiKey) }
     }
     
-    func saveQuestion(domain: String, apiKey: String, questionId: Int) -> Single<Void> {
-        let request = SaveQuestionRequest(domain: domain,
-                                          apiKey: apiKey,
-                                          userToken: sessionManager.internalId,
-                                          questionId: questionId)
+    func saveQuestion(questionId: Int) -> Single<Void> {
+        let request = SaveQuestionRequest(
+            userToken: sessionManager.internalId,
+            questionId: questionId
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .mapToVoid()
     }
     
-    func removeSavedQuestion(domain: String, apiKey: String, questionId: Int) -> Single<Void> {
-        let request = RemoveSavedQuestionRequest(domain: domain,
-                                                 apiKey: apiKey,
-                                                 userToken: sessionManager.internalId,
-                                                 questionId: questionId)
+    func removeSavedQuestion(questionId: Int) -> Single<Void> {
+        let request = RemoveSavedQuestionRequest(
+            userToken: sessionManager.internalId,
+            questionId: questionId
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .mapToVoid()
     }
     
-    func obtainAgainTest(domain: String, apiKey: String, userTestId: Int) -> Single<Test?> {
-        let request = AgainTestRequest(domain: domain,
-                                       apiKey: apiKey,
-                                       userToken: sessionManager.internalId,
-                                       userTestId: userTestId)
+    func obtainAgainTest(userTestId: Int) -> Single<Test?> {
+        let request = AgainTestRequest(
+            userToken: sessionManager.internalId,
+            userTestId: userTestId
+        )
         
         return xorRequestWrapper
-            .callServerStringApi(requestBody: request, key: apiKey)
-            .map { GetTestResponseMapper.map(from: $0, key: apiKey) }
+            .callServerStringApi(requestBody: request, key: GlobalDefinitions.apiKey)
+            .map { GetTestResponseMapper.map(from: $0, key: GlobalDefinitions.apiKey) }
     }
     
-    func finishTest(domain: String, apiKey: String, userTestId: Int) -> Single<Void> {
-        let request = FinishTestRequest(domain: domain,
-                                        apiKey: apiKey,
-                                        userToken: sessionManager.internalId,
-                                        userTestId: userTestId)
+    func finishTest(userTestId: Int) -> Single<Void> {
+        let request = FinishTestRequest(
+            userToken: sessionManager.internalId,
+            userTestId: userTestId
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .mapToVoid()
     }
     
-    func sendAnswer(domain: String, apiKey: String, questionId: Int, userTestId: Int, answerIds: [Int]) -> Single<Bool?> {
-        let request = SendAnswerRequest(domain: domain,
-                                        apiKey: apiKey,
-                                        userToken: sessionManager.internalId,
-                                        questionId: questionId,
-                                        answerIds: answerIds,
-                                        userTestId: userTestId)
+    func sendAnswer(questionId: Int, userTestId: Int, answerIds: [Int]) -> Single<Bool?> {
+        let request = SendAnswerRequest(
+            userToken: sessionManager.internalId,
+            questionId: questionId,
+            answerIds: answerIds,
+            userTestId: userTestId
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
@@ -279,15 +279,15 @@ extension QuestionManager {
 
 // MARK: Private
 private extension QuestionManager {
-    func loadOnboardingTest(domain: String, apiKey: String, courseId: Int) -> Single<Test?> {
-        let request = GetOnboardingTestRequest(domain: domain,
-                                               apiKey: apiKey,
-                                               userToken: sessionManager.internalId,
-                                               courseId: courseId)
+    func loadOnboardingTest(courseId: Int) -> Single<Test?> {
+        let request = GetOnboardingTestRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId
+        )
         
         return xorRequestWrapper
-            .callServerStringApi(requestBody: request, key: apiKey)
-            .map { GetTestResponseMapper.map(from: $0, key: apiKey) }
+            .callServerStringApi(requestBody: request, key: GlobalDefinitions.apiKey)
+            .map { GetTestResponseMapper.map(from: $0, key: GlobalDefinitions.apiKey) }
             .do(onSuccess: { test in
                 guard let test = test, let data = try? JSONEncoder().encode(test) else {
                     return
@@ -314,16 +314,16 @@ private extension QuestionManager {
             }
     }
     
-    func loadQotdTest(domain: String, apiKey: String, courseId: Int, activeSubscription: Bool) -> Single<QotdTest?> {
-        let request = GetQotdTestRequest(domain: domain,
-                                         apiKey: apiKey,
-                                         userToken: sessionManager.internalId,
-                                         courseId: courseId,
-                                         activeSubscription: activeSubscription)
+    func loadQotdTest(courseId: Int, activeSubscription: Bool) -> Single<QotdTest?> {
+        let request = GetQotdTestRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId,
+            activeSubscription: activeSubscription
+        )
         
         return xorRequestWrapper
-            .callServerStringApi(requestBody: request, key: apiKey)
-            .map { GetTestResponseMapper.map(from: $0, key: apiKey) }
+            .callServerStringApi(requestBody: request, key: GlobalDefinitions.apiKey)
+            .map { GetTestResponseMapper.map(from: $0, key: GlobalDefinitions.apiKey) }
             .map { test -> QotdTest? in
                 guard let test = test else {
                     return nil

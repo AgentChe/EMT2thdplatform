@@ -8,13 +8,11 @@
 import Alamofire
 
 struct FinishTestRequest: APIRequestBody {
-    let domain: String
-    let apiKey: String
     let userToken: String
     let userTestId: Int
     
     var url: String {
-        domain + "/api/tests/finish"
+        GlobalDefinitions.domain + "/api/tests/finish"
     }
     
     var method: HTTPMethod {
@@ -23,7 +21,7 @@ struct FinishTestRequest: APIRequestBody {
     
     var parameters: Parameters? {
          [
-            "_api_key": apiKey,
+            "_api_key": GlobalDefinitions.apiKey,
             "_user_token": userToken,
             "user_test_id": userTestId,
             "platform": 3

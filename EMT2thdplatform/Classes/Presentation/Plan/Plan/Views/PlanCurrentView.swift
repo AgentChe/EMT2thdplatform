@@ -25,15 +25,14 @@ final class PlanCurrentView: UIButton {
 
 // MARK: Public
 extension PlanCurrentView {
-    func setup(exam: Exam, course: Course) {
-        let string = String(format: "%@ - %@", exam.title, course.name)
+    func setup(course: Course) {
         let attrs = TextAttributes()
             .textColor(Appearance.mono100)
             .font(Fonts.Inter.semiBold(size: 15.scale))
             .lineHeight(18.scale)
             .letterSpacing(-0.44.scale)
             .lineBreakMode(.byTruncatingTail)
-        label.attributedText = string.attributed(with: attrs)
+        label.attributedText = course.name.attributed(with: attrs)
     }
 }
 

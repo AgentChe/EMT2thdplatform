@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol PlanManagerProtocol {
-    func obtainPlan(domain: String, apiKey: String, courseId: Int) -> Single<Plan?>
+    func obtainPlan(courseId: Int) -> Single<Plan?>
 }
 
 final class PlanManager: PlanManagerProtocol {
@@ -19,11 +19,11 @@ final class PlanManager: PlanManagerProtocol {
 
 // MARK: Public
 extension PlanManager {
-    func obtainPlan(domain: String, apiKey: String, courseId: Int) -> Single<Plan?> {
-        let request = GetPlanRequest(domain: domain,
-                                     apiKey: apiKey,
-                                     userToken: sessionManager.internalId,
-                                     courseId: courseId)
+    func obtainPlan(courseId: Int) -> Single<Plan?> {
+        let request = GetPlanRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)

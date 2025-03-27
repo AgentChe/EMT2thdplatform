@@ -46,6 +46,45 @@ final class OCourseView: OSlideView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func moveToThis() {
+        super.moveToThis()
+        
+        func source() -> Single<[Course]> {
+            coursesManager
+                .obtainCourses()
+        }
+        
+        func trigger(error: Error) -> Observable<Void> {
+            openError()
+        }
+        
+        observableRetrySingle
+            .retry(
+                source: { source() },
+                trigger: { trigger(error: $0) }
+            )
+            .trackActivity(activity)
+            .asDriver(onErrorJustReturn: [])
+            .drive(onNext: { [weak self] courses in
+                guard let self = self else { return }
+                
+                self.courses = courses
+                
+                let elements = courses.map { course in
+                    OExamsTableElement(
+                        code: String(course.id),
+                        title: course.name,
+                        subTitle: course.subTitle
+                    )
+                }
+                
+                self.tableView.setup(elements: elements)
+                
+                self.changeEnabled()
+            })
+            .disposed(by: disposeBag)
+    }
 }
 
 // MARK: Public
@@ -60,46 +99,6 @@ extension OCourseView {
         if let index = courseDelegates.firstIndex(where: { $0.weak === delegate }) {
             courseDelegates.remove(at: index)
         }
-    }
-}
-
-// MARK: OExamsViewDelegate
-extension OCourseView: OExamsViewDelegate {
-    func examsDidSelected(element: Exam) {
-        clear()
-        
-        func source() -> Single<[Course]> {
-            coursesManager
-                .obtainCourses(domain: element.domain, apiKey: element.api)
-        }
-        
-        func trigger(error: Error) -> Observable<Void> {
-            openError()
-        }
-        
-        observableRetrySingle
-            .retry(source: { source() },
-                   trigger: { trigger(error: $0) })
-            .trackActivity(activity)
-            .asDriver(onErrorJustReturn: [])
-            .drive(onNext: { [weak self] courses in
-                guard let self = self else {
-                    return
-                }
-                
-                self.courses = courses
-                
-                let elements = courses.map { course in
-                    OExamsTableElement(code: String(course.id),
-                                       title: course.name,
-                                       subTitle: course.subTitle)
-                }
-                
-                self.tableView.setup(elements: elements)
-                
-                self.changeEnabled()
-            })
-            .disposed(by: disposeBag)
     }
 }
 

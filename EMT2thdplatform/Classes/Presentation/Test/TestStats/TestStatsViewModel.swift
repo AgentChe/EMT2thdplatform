@@ -94,10 +94,10 @@ private extension TestStatsViewModel {
                 
                 func source() -> Single<TestStats> {
                     self.statsManager
-                        .obtainTestStats(domain: examEnvironment.exam.domain,
-                                         apiKey: examEnvironment.exam.api,
-                                         courseId: examEnvironment.course.id,
-                                         userTestId: userTestId)
+                        .obtainTestStats(
+                            courseId: examEnvironment.course.id,
+                            userTestId: userTestId
+                        )
                         .flatMap { stats -> Single<TestStats> in
                             guard let stats = stats else {
                                 return .error(ContentError(.notContent))

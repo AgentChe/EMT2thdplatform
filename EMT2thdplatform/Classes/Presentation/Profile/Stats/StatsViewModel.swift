@@ -140,9 +140,7 @@ private extension StatsViewModel {
                     return triggers
                         .flatMapLatest {
                             self.statsManager
-                                .obtainStats(domain: examEnvironment.exam.domain,
-                                             apiKey: examEnvironment.exam.api,
-                                             courseId: examEnvironment.course.id)
+                                .obtainStats(courseId: examEnvironment.course.id)
                                 .flatMap { stats -> Single<Stats> in
                                     guard let stats = stats else {
                                         return .error(ContentError(.notContent))

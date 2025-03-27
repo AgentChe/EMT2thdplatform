@@ -9,14 +9,13 @@ import UIKit
 
 final class OnboardingView: UIView {
     enum Step: Int {
-        case start, motivation, age, why, exams, course, quizSolution, test, determingSkill, quizResult, examDate, dailyGoal, studyMode, creatingPlan, plan
+        case start, motivation, age, why, course, quizSolution, test, determingSkill, quizResult, examDate, dailyGoal, studyMode, creatingPlan, plan
     }
     
     var didFinish: (() -> Void)?
     
     lazy var motivationView = OMotivationView(step: .motivation)
     lazy var ageView = OAgeView(step: .age)
-    lazy var examsView = OExamsView(step: .exams)
     lazy var courseView = OCourseView(step: .course)
     lazy var quizSolutionView = OQuizSolutionView(step: .quizSolution)
     lazy var testView = OTestView(step: .test)
@@ -32,7 +31,6 @@ final class OnboardingView: UIView {
             motivationView,
             ageView,
             OWhyView(step: .why),
-            examsView,
             courseView,
             quizSolutionView,
             testView,
@@ -126,9 +124,6 @@ private extension OnboardingView {
         
         motivationView.motivationDelegate = combineData
         ageView.ageDelegate = combineData
-        examsView.add(delegate: courseView)
-        examsView.add(delegate: combineData)
-        examsView.add(delegate: testView)
         courseView.add(delegate: combineData)
         courseView.add(delegate: testView)
         quizSolutionView.quizSolutionDelegate = self

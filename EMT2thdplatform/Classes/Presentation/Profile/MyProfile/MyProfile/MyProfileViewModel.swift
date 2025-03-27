@@ -77,10 +77,6 @@ private extension MyProfileViewModel {
             }
     }
     
-    func makeExam() -> Driver<String> {
-        examEnvironment.map { $0?.exam.title ?? "" }
-    }
-    
     func makeCourse() -> Driver<Course?> {
         examEnvironment.map { $0?.course }
     }
@@ -164,9 +160,7 @@ private extension MyProfileViewModel {
 
                 func source() -> Single<Void> {
                     self.statsManager
-                        .resetStats(domain: examEnvironment.exam.domain,
-                                    apiKey: examEnvironment.exam.api,
-                                    courseId: examEnvironment.course.id)
+                        .resetStats(courseId: examEnvironment.course.id)
                 }
 
                 func trigger(error: Error) -> Observable<Void> {

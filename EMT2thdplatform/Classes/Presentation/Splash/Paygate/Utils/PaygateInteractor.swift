@@ -78,34 +78,8 @@ extension PaygateInteractor: OtterScaleReceiptValidationDelegate {
             let anonymousId = sessionManager.anonymousId
             let internalId = sessionManager.internalId
         
-            return profileManager
-                .obtainExams()
-                .flatMap { [weak self] exams -> Single<Void> in
-                    guard let self else { return .never() }
-                    
-                    let requests = exams.map { exam -> Single<Void> in
-                        if anonymousId == internalId {
-                            return self.profileManager.login(
-                                domain: exam.domain,
-                                apiKey: exam.api,
-                                userToken: internalId
-                            )
-                            .catchAndReturn(())
-                        } else {
-                            return self.profileManager.syncTokens(
-                                domain: exam.domain,
-                                apiKey: exam.api,
-                                oldToken: anonymousId,
-                                newToken: internalId
-                            )
-                            .catchAndReturn(())
-                        }
-                    }
-                    
-                    return Single
-                        .zip(requests)
-                        .mapToVoid()
-                }
+            return anonymousId == internalId ? profileManager.login(userToken: internalId) : profileManager.syncTokens(oldToken: anonymousId, newToken: internalId)
+                .catchAndReturn(())
         }()
         
         let disposable = complete.subscribe(onSuccess: { [weak self] in

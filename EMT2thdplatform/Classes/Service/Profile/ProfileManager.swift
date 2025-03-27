@@ -9,27 +9,23 @@ import RxSwift
 import Foundation
 
 protocol ProfileManagerProtocol {
-    func set(domain: String,
-             apiKey: String,
-             motivation: Int?,
-             examDate: Date?,
-             testMode: TestMode?,
-             testMinutes: Int?,
-             testDaysOfWeek: [DayOfWeek]?,
-             exam: Exam?,
-             course: Course?,
-             pushToken: String?) -> Single<Void>
-    func resetCourse(domain: String, apiKey: String) -> Single<Void>
+    func set(
+        motivation: Int?,
+        examDate: Date?,
+        testMode: TestMode?,
+        testMinutes: Int?,
+        testDaysOfWeek: [DayOfWeek]?,
+        course: Course?
+    ) -> Single<Void>
     func obtainProfile(forceUpdate: Bool) -> Single<Profile?>
     func obtainReferenceDateOfExam() -> Single<Date?>
     func obtainDateOfExam(forceUpdate: Bool) -> Single<Date?>
-    func obtainExams() -> Single<[Exam]>
     func obtainExamEnvironment() -> Single<ExamEnvironment?>
     func obtainTestMode(forceUpdate: Bool) -> Single<TestMode?>
     func obtainTestMinutes(forceUpdate: Bool) -> Single<Int?>
     func obtainTestDaysOfWeek() -> Single<[DayOfWeek]?>
-    func syncTokens(domain: String, apiKey: String, oldToken: String, newToken: String) -> Single<Void>
-    func login(domain: String, apiKey: String, userToken: String) -> Single<Void>
+    func syncTokens(oldToken: String, newToken: String) -> Single<Void>
+    func login(userToken: String) -> Single<Void>
 }
 
 final class ProfileManager: ProfileManagerProtocol {
@@ -49,50 +45,35 @@ final class ProfileManager: ProfileManagerProtocol {
 
 // MARK: Study
 extension ProfileManager {
-    func set(domain: String,
-             apiKey: String,
-             motivation: Int? = nil,
-             examDate: Date? = nil,
-             testMode: TestMode? = nil,
-             testMinutes: Int? = nil,
-             testDaysOfWeek: [DayOfWeek]? = nil,
-             exam: Exam? = nil,
-             course: Course? = nil,
-             pushToken: String? = nil) -> Single<Void> {
-        let request = SetRequest(domain: domain,
-                                 apiKey: apiKey,
-                                 userToken: sessionManager.internalId,
-                                 level: motivation,
-                                 testMode: testMode?.code(),
-                                 examDate: examDateStringFormatted(examDate),
-                                 testMinutes: testMinutes,
-                                 courseId: course?.id,
-                                 pushToken: pushToken)
+    func set(
+        motivation: Int? = nil,
+        examDate: Date? = nil,
+        testMode: TestMode? = nil,
+        testMinutes: Int? = nil,
+        testDaysOfWeek: [DayOfWeek]? = nil,
+        course: Course? = nil
+    ) -> Single<Void> {
+        let request = SetRequest(
+            userToken: sessionManager.internalId,
+            level: motivation,
+            testMode: testMode?.code(),
+            examDate: examDateStringFormatted(examDate),
+            testMinutes: testMinutes,
+            courseId: course?.id
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .mapToVoid()
             .do(onSuccess: { [weak self] in
-                guard let self = self else {
-                    return
-                }
+                guard let self = self else { return }
 
                 self.store(dateOfExam: examDate)
                 self.store(testMode: testMode)
                 self.store(testMinutes: testMinutes)
                 self.store(testDaysOfWeek: testDaysOfWeek)
-                self.store(exam: exam, course: course)
+                self.store(course: course)
             })
-    }
-    
-    func resetCourse(domain: String, apiKey: String) -> Single<Void> {
-        let request = ResetCourseRequest(domain: domain,
-                                         apiKey: apiKey,
-                                         userToken: sessionManager.internalId)
-        
-        return defaultRequestWrapper
-            .callServerApi(requestBody: request)
-            .mapToVoid()
     }
     
     func obtainProfile(forceUpdate: Bool) -> Single<Profile?> {
@@ -102,10 +83,7 @@ extension ProfileManager {
     func obtainReferenceDateOfExam() -> Single<Date?> {
         Single<Date?>
             .create { event in
-                guard let date = UserDefaults.standard.value(forKey: Constants.referenceDateOfExamKey) as? Date else {
-                    event(.success(nil))
-                    return Disposables.create()
-                }
+                let date = UserDefaults.standard.value(forKey: Constants.referenceDateOfExamKey) as? Date
                 
                 event(.success(date))
                 
@@ -117,35 +95,15 @@ extension ProfileManager {
         forceUpdate ? loadDateOfExam() : cachedDateOfExam()
     }
     
-    func obtainExams() -> Single<[Exam]> {
-        Single<[Exam]>
-            .create { event in
-                let exams = [
-                    Exam(code: "AWS",
-                         title: "Onboarding.Exams.Exam1.Name".localized,
-                         subTitle: "Onboarding.Exams.Exam1.Text".localized,
-                         questionsCount: 10000,
-                         api: GlobalDefinitions.apiKey,
-                         domain: GlobalDefinitions.domain)
-                ]
-                
-                event(.success(exams))
-                
-                return Disposables.create()
-            }
-    }
-    
     func obtainExamEnvironment() -> Single<ExamEnvironment?> {
         Single<ExamEnvironment?>
             .create { event in
-                guard let data = UserDefaults.standard.data(forKey: Constants.examEnvironmentKey) else {
-                    event(.success(nil))
-                    return Disposables.create()
-                }
+                let environment: ExamEnvironment? = {
+                    guard let data = UserDefaults.standard.data(forKey: Constants.examEnvironmentKey) else { return nil }
+                    return try? JSONDecoder().decode(ExamEnvironment.self, from: data)
+                }()
                 
-                let examEnvironment = try? JSONDecoder().decode(ExamEnvironment.self, from: data)
-                
-                event(.success(examEnvironment))
+                event(.success(environment))
                 
                 return Disposables.create()
             }
@@ -176,21 +134,19 @@ extension ProfileManager {
             }
     }
     
-    func syncTokens(domain: String, apiKey: String, oldToken: String, newToken: String) -> Single<Void> {
-        let request = SyncTokensRequest(domain: domain,
-                                        apiKey: apiKey,
-                                        oldToken: oldToken,
-                                        newToken: newToken)
+    func syncTokens(oldToken: String, newToken: String) -> Single<Void> {
+        let request = SyncTokensRequest(
+            oldToken: oldToken,
+            newToken: newToken
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .mapToVoid()
     }
     
-    func login(domain: String, apiKey: String, userToken: String) -> Single<Void> {
-        let request = LoginRequest(domain: domain,
-                                   apiKey: apiKey,
-                                   userToken: userToken)
+    func login(userToken: String) -> Single<Void> {
+        let request = LoginRequest(userToken: userToken)
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
@@ -213,19 +169,17 @@ private extension ProfileManager {
                 examDate,
                 examEnvironment
             ) { testMode, testMinutes, examDate, examEnvironment -> Profile in
-                Profile(testMode: testMode,
-                        testMinutes: testMinutes,
-                        examDate: examDate,
-                        selectedCourse: examEnvironment?.course)
+                Profile(
+                    testMode: testMode,
+                    testMinutes: testMinutes,
+                    examDate: examDate,
+                    selectedCourse: examEnvironment?.course
+                )
             }
     }
     
     func loadProfile() -> Single<Profile?> {
-        let request = GetProfileRequest(
-            domain: GlobalDefinitions.domain,
-            apiKey: GlobalDefinitions.apiKey,
-            userToken: sessionManager.internalId
-        )
+        let request = GetProfileRequest(userToken: sessionManager.internalId)
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
@@ -238,7 +192,7 @@ private extension ProfileManager {
                 self.store(testMode: profile.testMode)
                 self.store(testMinutes: profile.testMinutes)
                 self.store(dateOfExam: profile.examDate)
-                self.store(exam: nil, course: profile.selectedCourse)
+                self.store(course: profile.selectedCourse)
             })
     }
     
@@ -279,12 +233,10 @@ private extension ProfileManager {
             })
     }
     
-    func store(exam: Exam?, course: Course?) {
-        guard let exam = exam, let course = course else {
-            return
-        }
+    func store(course: Course?) {
+        guard let course else { return }
         
-        let environment = ExamEnvironment(exam: exam, course: course)
+        let environment = ExamEnvironment(course: course)
         
         guard let data = try? JSONEncoder().encode(environment) else {
             return

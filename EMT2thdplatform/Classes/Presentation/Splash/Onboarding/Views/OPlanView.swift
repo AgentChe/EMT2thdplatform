@@ -73,30 +73,17 @@ private extension OPlanView {
                     return .never()
                 }
                 
-                return self.profileManager
-                    .obtainExams()
-                    .flatMap { exams -> Single<Bool> in
-                        let requests = exams
-                            .map { exam -> Single<Bool> in
-                                self.profileManager
-                                    .set(domain: exam.domain,
-                                         apiKey: exam.api,
-                                         motivation: combineData.motivation.code,
-                                         examDate: combineData.examDate,
-                                         testMode: combineData.studyMode.code,
-                                         testMinutes: combineData.testMinutes,
-                                         testDaysOfWeek: combineData.testDays,
-                                         exam: combineData.exam.code == exam.code ? combineData.exam : nil,
-                                         course: combineData.exam.code == exam.code ? combineData.course : nil,
-                                         pushToken: combineData.pushToken)
-                                    .map { true }
-                                    .catchAndReturn(false)
-                            }
-                        
-                        return Single
-                            .zip(requests)
-                            .map { !$0.contains(false) }
-                    }
+                return profileManager
+                    .set(
+                        motivation: combineData.motivation.code,
+                        examDate: combineData.examDate,
+                        testMode: combineData.studyMode.code,
+                        testMinutes: combineData.testMinutes,
+                        testDaysOfWeek: combineData.testDays,
+                        course: combineData.course
+                    )
+                    .map { true }
+                    .catchAndReturn(false)
             }
             .subscribe(onNext: { [weak self] success in
                 guard let self = self else {

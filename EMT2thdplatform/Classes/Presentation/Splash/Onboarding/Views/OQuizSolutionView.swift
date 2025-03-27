@@ -17,7 +17,6 @@ final class OQuizSolutionView: OSlideView {
     
     lazy var imageView = makeImageView()
     lazy var titleLabel = makeTitleLabel()
-    lazy var subTitleLabel = makeSubTitleLabel()
     lazy var skipButton = makeSkipButton()
     lazy var startButton = makeStartButton()
     
@@ -67,12 +66,6 @@ private extension OQuizSolutionView {
         ])
         
         NSLayoutConstraint.activate([
-            subTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 28.scale),
-            subTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -28.scale),
-            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12.scale)
-        ])
-        
-        NSLayoutConstraint.activate([
             skipButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 28.scale),
             skipButton.widthAnchor.constraint(equalToConstant: 154.scale),
             skipButton.heightAnchor.constraint(equalToConstant: 48.scale),
@@ -110,22 +103,6 @@ private extension OQuizSolutionView {
         let view = UILabel()
         view.numberOfLines = 0
         view.attributedText = "Onboarding.QuizSolution.Title".localized.attributed(with: attrs)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(view)
-        return view
-    }
-    
-    func makeSubTitleLabel() -> UILabel {
-        let attrs = TextAttributes()
-            .textColor(Appearance.mono300)
-            .font(Fonts.Inter.regular(size: 15.scale))
-            .lineHeight(22.5.scale)
-            .letterSpacing(-0.14.scale)
-            .textAlignment(.center)
-        
-        let view = UILabel()
-        view.numberOfLines = 0
-        view.attributedText = "Onboarding.QuizSolution.SubTitle".localized.attributed(with: attrs)
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
         return view

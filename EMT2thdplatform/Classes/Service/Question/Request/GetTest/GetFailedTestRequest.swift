@@ -8,14 +8,12 @@
 import Alamofire
 
 struct GetFailedTestRequest: APIRequestBody {
-    let domain: String
-    let apiKey: String
     let userToken: String
     let courseId: Int
     let activeSubscription: Bool
     
     var url: String {
-        domain + "/api/testings/failed_set"
+        GlobalDefinitions.domain + "/api/testings/failed_set"
     }
     
     var method: HTTPMethod {
@@ -24,7 +22,7 @@ struct GetFailedTestRequest: APIRequestBody {
     
     var parameters: Parameters? {
          [
-            "_api_key": apiKey,
+            "_api_key": GlobalDefinitions.apiKey,
             "_user_token": userToken,
             "course_id": courseId,
             "user_is_premium": activeSubscription,

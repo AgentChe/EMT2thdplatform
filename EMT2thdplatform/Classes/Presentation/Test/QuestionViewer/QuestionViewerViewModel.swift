@@ -16,8 +16,6 @@ final class QuestionViewerViewModel {
     lazy var isSavedQuestion = makeIsSavedQuestion()
     lazy var elements = makeElements()
     
-    private lazy var examEnvironment = makeExamEnvironment()
-    
     private let question: BehaviorRelay<Question>
     private let answeredIds: BehaviorRelay<[Int]>
     
@@ -43,20 +41,14 @@ private extension QuestionViewerViewModel {
             .withLatestFrom(question) { ($0, $1.id) }
             .asDriver(onErrorDriveWith: .never())
         
-        let isSavedQuestion = Driver
-            .combineLatest(mark, examEnvironment) { ($0.0, $0.1, $1) }
-            .flatMapFirst { [weak self] isSaved, questionId, examEnvironment -> Driver<Bool> in
-                guard let self = self else {
-                    return .empty()
-                }
-                
-                let domain = examEnvironment.exam.domain
-                let apiKey = examEnvironment.exam.api
+        let isSavedQuestion = mark
+            .flatMapFirst { [weak self] isSaved, questionId -> Driver<Bool> in
+                guard let self = self else { return .empty() }
                 
                 func source() -> Single<Bool> {
                     let request = isSaved
-                        ? self.questionManager.removeSavedQuestion(domain: domain, apiKey: apiKey, questionId: questionId)
-                        : self.questionManager.saveQuestion(domain: domain, apiKey: apiKey, questionId: questionId)
+                        ? self.questionManager.removeSavedQuestion(questionId: questionId)
+                        : self.questionManager.saveQuestion(questionId: questionId)
 
                     return request
                         .map { !isSaved }
@@ -153,12 +145,5 @@ private extension QuestionViewerViewModel {
         }
         
         return explanation
-    }
-    
-    func makeExamEnvironment() -> Driver<ExamEnvironment> {
-        profileManager
-            .obtainExamEnvironment()
-            .compactMap { $0 }
-            .asDriver(onErrorDriveWith: .never())
     }
 }

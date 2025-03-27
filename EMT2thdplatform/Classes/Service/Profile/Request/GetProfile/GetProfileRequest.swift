@@ -8,12 +8,10 @@
 import Alamofire
 
 struct GetProfileRequest: APIRequestBody {
-    let domain: String
-    let apiKey: String
     let userToken: String
     
     var url: String {
-        domain + "/api/users/show"
+        GlobalDefinitions.domain + "/api/users/show"
     }
     
     var method: HTTPMethod {
@@ -22,7 +20,7 @@ struct GetProfileRequest: APIRequestBody {
     
     var parameters: Parameters? {
         [
-            "_api_key": apiKey,
+            "_api_key": GlobalDefinitions.apiKey,
             "_user_token": userToken,
             "platform": 3
         ]

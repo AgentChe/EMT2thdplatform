@@ -8,8 +8,6 @@
 import Alamofire
 
 struct SetRequest: APIRequestBody {
-    private let domain: String
-    private let apiKey: String
     private let userToken: String
     private let level: Int?
     private let testMode: Int?
@@ -18,17 +16,15 @@ struct SetRequest: APIRequestBody {
     private let courseId: Int?
     private let pushToken: String?
     
-    init(domain: String,
-         apiKey: String,
-         userToken: String,
-         level: Int? = nil,
-         testMode: Int? = nil,
-         examDate: String? = nil,
-         testMinutes: Int? = nil,
-         courseId: Int? = nil,
-         pushToken: String? = nil) {
-        self.domain = domain
-        self.apiKey = apiKey
+    init(
+        userToken: String,
+        level: Int? = nil,
+        testMode: Int? = nil,
+        examDate: String? = nil,
+        testMinutes: Int? = nil,
+        courseId: Int? = nil,
+        pushToken: String? = nil
+    ) {
         self.userToken = userToken
         self.level = level
         self.testMode = testMode
@@ -39,7 +35,7 @@ struct SetRequest: APIRequestBody {
     }
     
     var url: String {
-        domain + "/api/users/set"
+        GlobalDefinitions.domain + "/api/users/set"
     }
     
     var method: HTTPMethod {
@@ -48,7 +44,7 @@ struct SetRequest: APIRequestBody {
     
     var parameters: Parameters? {
         var params: [String: Any] = [
-            "_api_key": apiKey,
+            "_api_key": GlobalDefinitions.apiKey,
             "_user_token": userToken,
             "platform": 3
         ]

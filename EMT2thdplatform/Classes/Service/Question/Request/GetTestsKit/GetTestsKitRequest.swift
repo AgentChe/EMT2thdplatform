@@ -8,13 +8,11 @@
 import Alamofire
 
 struct GetTestsKitRequest: APIRequestBody {
-    let domain: String
-    let apiKey: String
     let userToken: String
     let courseId: Int
 
     var url: String {
-        domain + "/api/tests/list"
+        GlobalDefinitions.domain + "/api/tests/list"
     }
     
     var method: HTTPMethod {
@@ -23,7 +21,7 @@ struct GetTestsKitRequest: APIRequestBody {
     
     var parameters: Parameters? {
         [
-            "_api_key": apiKey,
+            "_api_key": GlobalDefinitions.apiKey,
             "_user_token": userToken,
             "course_id": courseId,
             "platform": 3

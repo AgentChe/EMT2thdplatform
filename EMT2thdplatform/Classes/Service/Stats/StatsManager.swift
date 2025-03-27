@@ -8,9 +8,9 @@
 import RxSwift
 
 protocol StatsManagerProtocol {
-    func resetStats(domain: String, apiKey: String, courseId: Int) -> Single<Void>
-    func obtainStats(domain: String, apiKey: String, courseId: Int) -> Single<Stats?>
-    func obtainTestStats(domain: String, apiKey: String, courseId: Int, userTestId: Int) -> Single<TestStats?>
+    func resetStats(courseId: Int) -> Single<Void>
+    func obtainStats(courseId: Int) -> Single<Stats?>
+    func obtainTestStats(courseId: Int, userTestId: Int) -> Single<TestStats?>
 }
 
 final class StatsManager: StatsManagerProtocol {
@@ -22,11 +22,11 @@ final class StatsManager: StatsManagerProtocol {
 
 // MARK: Public
 extension StatsManager {
-    func resetStats(domain: String, apiKey: String, courseId: Int) -> Single<Void> {
-        let request = ResetStatsRequest(domain: domain,
-                                        apiKey: apiKey,
-                                        userToken: sessionManager.internalId,
-                                        courseId: courseId)
+    func resetStats(courseId: Int) -> Single<Void> {
+        let request = ResetStatsRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
@@ -36,27 +36,27 @@ extension StatsManager {
             })
     }
     
-    func obtainStats(domain: String, apiKey: String, courseId: Int) -> Single<Stats?> {
-        let request = GetStatsRequest(domain: domain,
-                                      apiKey: apiKey,
-                                      userToken: sessionManager.internalId,
-                                      courseId: courseId)
+    func obtainStats(courseId: Int) -> Single<Stats?> {
+        let request = GetStatsRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId
+        )
         
         return defaultRequestWrapper
             .callServerApi(requestBody: request)
             .map { try GetStatsResponseMapper.map(from: $0) }
     }
     
-    func obtainTestStats(domain: String, apiKey: String, courseId: Int, userTestId: Int) -> Single<TestStats?> {
-        let request = GetTestStatsRequest(domain: domain,
-                                          apiKey: apiKey,
-                                          userToken: sessionManager.internalId,
-                                          courseId: courseId,
-                                          userTestId: userTestId,
-                                          peek: true)
+    func obtainTestStats(courseId: Int, userTestId: Int) -> Single<TestStats?> {
+        let request = GetTestStatsRequest(
+            userToken: sessionManager.internalId,
+            courseId: courseId,
+            userTestId: userTestId,
+            peek: true
+        )
         
         return xorRequestWrapper
-            .callServerStringApi(requestBody: request, key: apiKey)
-            .map { GetTestStatsResponseMapper.map(from: $0, key: apiKey) }
+            .callServerStringApi(requestBody: request, key: GlobalDefinitions.apiKey)
+            .map { GetTestStatsResponseMapper.map(from: $0, key: GlobalDefinitions.apiKey) }
     }
 }

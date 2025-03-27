@@ -8,12 +8,10 @@
 import Alamofire
 
 struct LoginRequest: APIRequestBody {
-    let domain: String
-    let apiKey: String
     let userToken: String
 
     var url: String {
-        domain + "/api/users/login"
+        GlobalDefinitions.domain + "/api/users/login"
     }
     
     var method: HTTPMethod {
@@ -22,7 +20,7 @@ struct LoginRequest: APIRequestBody {
     
     var parameters: Parameters? {
         [
-            "_api_key": apiKey,
+            "_api_key": GlobalDefinitions.apiKey,
             "user_token": userToken,
             "platform": 3
         ]

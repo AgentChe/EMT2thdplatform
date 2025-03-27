@@ -8,13 +8,11 @@
 import Alamofire
 
 struct RemoveSavedQuestionRequest: APIRequestBody {
-    let domain: String
-    let apiKey: String
     let userToken: String
     let questionId: Int
     
     var url: String {
-        domain + "/api/tests/remove"
+        GlobalDefinitions.domain + "/api/tests/remove"
     }
     
     var method: HTTPMethod {
@@ -23,7 +21,7 @@ struct RemoveSavedQuestionRequest: APIRequestBody {
     
     var parameters: Parameters? {
          [
-            "_api_key": apiKey,
+            "_api_key": GlobalDefinitions.apiKey,
             "_user_token": userToken,
             "question_id": questionId,
             "platform": 3
