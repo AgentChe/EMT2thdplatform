@@ -40,28 +40,13 @@ final class PaygateViewController: UIViewController {
         
         Observable
             .merge(
-                mainView.product1Button.rx.tap.map { (true, false) },
-                mainView.product2Button.rx.tap.map { (false, true) },
-                mainView.enableTrialButton.rx.tap
-                    .compactMap { [weak self] in
-                        let isEnable = self?.mainView.enableTrialButton.isEnable ?? false
-                        let newValue = !isEnable
-                        return (!newValue, newValue)
-                    }
+                mainView.lifetimeButton.rx.tap.map { (true, false) },
+                mainView.subscriptionButton.rx.tap.map { (false, true) }
             )
             .startWith((false, true))
             .bind(to: Binder(mainView) { base, args in
-                base.product1Button.marked = args.0
-                base.product2Button.marked = args.1
-                base.enableTrialButton.isEnable = args.1
-                
-                let buyTitle = args.0 ? "Paygate.Continue".localized : "Paygate.TryFreeSubscribe".localized
-                base.setup(buyTitle: buyTitle)
-                
-                let info = args.0 ? "Paygate.CancelAnytime".localized : "Paygate.NoPaymentNow".localized
-                base.infoView.setup(text: info.uppercased())
-                
-                base.bestOfferView.update(marked: args.0)
+                base.lifetimeButton.marked = args.0
+                base.subscriptionButton.marked = args.1
             })
             .disposed(by: disposeBag)
         
@@ -72,9 +57,9 @@ final class PaygateViewController: UIViewController {
                 }
                 
                 let id = [
-                    self.mainView.product1Button,
-                    self.mainView.product2Button
-                ].first(where: { $0.marked })?.product?.id
+                    self.mainView.lifetimeButton,
+                    self.mainView.subscriptionButton
+                ].first(where: { $0.marked })?.product?.iapProduct.id
                 
                 return id
             }
@@ -102,8 +87,8 @@ final class PaygateViewController: UIViewController {
         
         output.products
             .drive(Binder(mainView) { base, products in
-                base.product1Button.product = products.yearly
-                base.product2Button.product = products.weekly
+                base.lifetimeButton.setup(product: products.lifetime)
+                base.subscriptionButton.setup(product: products.subscription)
             })
             .disposed(by: disposeBag)
     }
@@ -124,13 +109,12 @@ private extension PaygateViewController {
         activity ? mainView.preloader.startAnimating() : mainView.preloader.stopAnimating()
         
         [
-            mainView.product1Button,
-            mainView.product2Button,
-            mainView.enableTrialButton,
+            mainView.lifetimeButton,
+            mainView.subscriptionButton,
             mainView.buyButton,
+            mainView.cancelAnytimeLabel,
             mainView.actionsView,
-            mainView.closeButton,
-            mainView.bestOfferView
+            mainView.closeButton
         ].forEach { $0.isHidden = activity }
     }
     
@@ -143,7 +127,7 @@ private extension PaygateViewController {
         case .error:
             showError()
         case .open(let url):
-            UIApplication.shared.open(url)
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
     

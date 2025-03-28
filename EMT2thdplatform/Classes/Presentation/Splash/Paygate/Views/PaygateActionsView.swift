@@ -35,17 +35,17 @@ private extension PaygateActionsView {
 private extension PaygateActionsView {
     func makeConstraints() {
         NSLayoutConstraint.activate([
-            termsOfUseButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 39.scale),
+            termsOfUseButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 45.5.scale),
             termsOfUseButton.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            privacyPolicyButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 141.scale),
+            privacyPolicyButton.leadingAnchor.constraint(equalTo: termsOfUseButton.trailingAnchor, constant: 12.scale),
             privacyPolicyButton.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            restoreButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 246.scale),
+            restoreButton.leadingAnchor.constraint(equalTo: privacyPolicyButton.trailingAnchor, constant: 12.scale),
             restoreButton.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
@@ -55,7 +55,7 @@ private extension PaygateActionsView {
 private extension PaygateActionsView {
     func makeActionButton(text: String) -> TapAreaButton {
         let attrs = TextAttributes()
-            .textColor(Appearance.mono200.withAlphaComponent(0.6))
+            .textColor(Appearance.mono300)
             .font(Fonts.Inter.regular(size: 12.scale))
         
         let view = TapAreaButton()

@@ -23,7 +23,7 @@ final class GlobalDefinitions {
     
     // TODO
     enum Paygate {
-        static let yearly = "smartcloset.yearly"
-        static let weekly = "smartcloset.weekly"
+        static let lifetime = "smartcloset.yearly"
+        static let subscription = "smartcloset.weekly"
     }
 }

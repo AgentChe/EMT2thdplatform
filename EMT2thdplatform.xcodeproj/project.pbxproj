@@ -29,7 +29,6 @@
 		DEDD4D822D95364C00DC24F6 /* GetTestResponseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4D4C2D95364C00DC24F6 /* GetTestResponseMapper.swift */; };
 		DEDD4D832D95364C00DC24F6 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4BA22D95364C00DC24F6 /* CircleProgressView.swift */; };
 		DEDD4D842D95364C00DC24F6 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4BCF2D95364C00DC24F6 /* MainView.swift */; };
-		DEDD4D852D95364C00DC24F6 /* PaygateEnableTrialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4C972D95364C00DC24F6 /* PaygateEnableTrialButton.swift */; };
 		DEDD4D862D95364C00DC24F6 /* StepCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4BEC2D95364C00DC24F6 /* StepCollectionView.swift */; };
 		DEDD4D872D95364C00DC24F6 /* QuestionTableElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4CDE2D95364C00DC24F6 /* QuestionTableElement.swift */; };
 		DEDD4D882D95364C00DC24F6 /* NoMissedQuestionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4CE82D95364C00DC24F6 /* NoMissedQuestionsView.swift */; };
@@ -61,7 +60,6 @@
 		DEDD4DA22D95364C00DC24F6 /* PlanTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4D142D95364C00DC24F6 /* PlanTest.swift */; };
 		DEDD4DA32D95364C00DC24F6 /* QuestionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4D5A2D95364C00DC24F6 /* QuestionManager.swift */; };
 		DEDD4DA42D95364C00DC24F6 /* Review.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4D3A2D95364C00DC24F6 /* Review.swift */; };
-		DEDD4DA52D95364C00DC24F6 /* PaygateBestOfferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4C962D95364C00DC24F6 /* PaygateBestOfferView.swift */; };
 		DEDD4DA62D95364C00DC24F6 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4BA62D95364C00DC24F6 /* PaddingLabel.swift */; };
 		DEDD4DA72D95364C00DC24F6 /* PracticeTableTestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4C022D95364C00DC24F6 /* PracticeTableTestsCell.swift */; };
 		DEDD4DA82D95364C00DC24F6 /* QuestionContentCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4CD02D95364C00DC24F6 /* QuestionContentCollectionCell.swift */; };
@@ -122,7 +120,6 @@
 		DEDD4DE02D95364C00DC24F6 /* ReviewFilterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4C382D95364C00DC24F6 /* ReviewFilterButton.swift */; };
 		DEDD4DE12D95364C00DC24F6 /* StepCollectionElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4BEA2D95364C00DC24F6 /* StepCollectionElement.swift */; };
 		DEDD4DE22D95364C00DC24F6 /* TestAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4CC52D95364C00DC24F6 /* TestAnalytics.swift */; };
-		DEDD4DE32D95364C00DC24F6 /* ProductPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4D322D95364C00DC24F6 /* ProductPrice.swift */; };
 		DEDD4DE42D95364C00DC24F6 /* CoursesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4BE12D95364C00DC24F6 /* CoursesViewModel.swift */; };
 		DEDD4DE52D95364C00DC24F6 /* QuestionTableQuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4CDB2D95364C00DC24F6 /* QuestionTableQuestionCell.swift */; };
 		DEDD4DE62D95364C00DC24F6 /* ProfileMediator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4D2B2D95364C00DC24F6 /* ProfileMediator.swift */; };
@@ -310,7 +307,6 @@
 		DEDD4EA22D95364C00DC24F6 /* GetTestStatsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4D682D95364C00DC24F6 /* GetTestStatsRequest.swift */; };
 		DEDD4EA32D95364C00DC24F6 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4D1F2D95364C00DC24F6 /* Profile.swift */; };
 		DEDD4EA42D95364C00DC24F6 /* StatsTableTitleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4C5E2D95364C00DC24F6 /* StatsTableTitleCell.swift */; };
-		DEDD4EA52D95364C00DC24F6 /* PaygateInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4C992D95364C00DC24F6 /* PaygateInfoView.swift */; };
 		DEDD4EA62D95364C00DC24F6 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4BBB2D95364C00DC24F6 /* NetworkError.swift */; };
 		DEDD4EA72D95364C00DC24F6 /* CoursesTableCourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4BD72D95364C00DC24F6 /* CoursesTableCourseCell.swift */; };
 		DEDD4EA82D95364C00DC24F6 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4C522D95364C00DC24F6 /* SettingsView.swift */; };
@@ -350,6 +346,8 @@
 		DEDD4ED32D95365300DC24F6 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEDD4EC82D95365300DC24F6 /* Inter-Regular.ttf */; };
 		DEDD4ED52D953C1700DC24F6 /* Inter-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = DEDD4ED42D953C1700DC24F6 /* Inter-Medium.otf */; };
 		DEDD4ED72D953FC900DC24F6 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4ED62D953FC900DC24F6 /* UIApplication+Extension.swift */; };
+		DEF31DB92D967AF400B67B30 /* PaygateLifetimeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF31DB82D967AF400B67B30 /* PaygateLifetimeButton.swift */; };
+		DEF31DBB2D967AFE00B67B30 /* PaygateSubscriptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF31DBA2D967AFE00B67B30 /* PaygateSubscriptionButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -540,10 +538,7 @@
 		DEDD4C922D95364C00DC24F6 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		DEDD4C932D95364C00DC24F6 /* PaygateInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateInteractor.swift; sourceTree = "<group>"; };
 		DEDD4C952D95364C00DC24F6 /* PaygateActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateActionsView.swift; sourceTree = "<group>"; };
-		DEDD4C962D95364C00DC24F6 /* PaygateBestOfferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateBestOfferView.swift; sourceTree = "<group>"; };
-		DEDD4C972D95364C00DC24F6 /* PaygateEnableTrialButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateEnableTrialButton.swift; sourceTree = "<group>"; };
 		DEDD4C982D95364C00DC24F6 /* PaygateInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateInfoCell.swift; sourceTree = "<group>"; };
-		DEDD4C992D95364C00DC24F6 /* PaygateInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateInfoView.swift; sourceTree = "<group>"; };
 		DEDD4C9A2D95364C00DC24F6 /* PaygateProductButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateProductButton.swift; sourceTree = "<group>"; };
 		DEDD4C9C2D95364C00DC24F6 /* PaygateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateView.swift; sourceTree = "<group>"; };
 		DEDD4C9D2D95364C00DC24F6 /* PaygateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateViewController.swift; sourceTree = "<group>"; };
@@ -645,7 +640,6 @@
 		DEDD4D2E2D95364C00DC24F6 /* IAPErrorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPErrorHelper.swift; sourceTree = "<group>"; };
 		DEDD4D302D95364C00DC24F6 /* IAPActionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPActionResult.swift; sourceTree = "<group>"; };
 		DEDD4D312D95364C00DC24F6 /* IAPProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPProduct.swift; sourceTree = "<group>"; };
-		DEDD4D322D95364C00DC24F6 /* ProductPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPrice.swift; sourceTree = "<group>"; };
 		DEDD4D342D95364C00DC24F6 /* IAPManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		DEDD4D352D95364C00DC24F6 /* PurchaseValidationObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseValidationObserver.swift; sourceTree = "<group>"; };
 		DEDD4D372D95364C00DC24F6 /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
@@ -699,6 +693,8 @@
 		DEDD4ECC2D95365300DC24F6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DEDD4ED42D953C1700DC24F6 /* Inter-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.otf"; sourceTree = "<group>"; };
 		DEDD4ED62D953FC900DC24F6 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		DEF31DB82D967AF400B67B30 /* PaygateLifetimeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateLifetimeButton.swift; sourceTree = "<group>"; };
+		DEF31DBA2D967AFE00B67B30 /* PaygateSubscriptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaygateSubscriptionButton.swift; sourceTree = "<group>"; };
 		DFB88E306851BCCBD6C7043B /* Pods_EMT2thdplatform.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EMT2thdplatform.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1490,12 +1486,9 @@
 		DEDD4C9B2D95364C00DC24F6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DEF31DB72D967A3600B67B30 /* ProductButton */,
 				DEDD4C952D95364C00DC24F6 /* PaygateActionsView.swift */,
-				DEDD4C962D95364C00DC24F6 /* PaygateBestOfferView.swift */,
-				DEDD4C972D95364C00DC24F6 /* PaygateEnableTrialButton.swift */,
 				DEDD4C982D95364C00DC24F6 /* PaygateInfoCell.swift */,
-				DEDD4C992D95364C00DC24F6 /* PaygateInfoView.swift */,
-				DEDD4C9A2D95364C00DC24F6 /* PaygateProductButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1966,7 +1959,6 @@
 			children = (
 				DEDD4D302D95364C00DC24F6 /* IAPActionResult.swift */,
 				DEDD4D312D95364C00DC24F6 /* IAPProduct.swift */,
-				DEDD4D322D95364C00DC24F6 /* ProductPrice.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2179,6 +2171,16 @@
 			path = Strings;
 			sourceTree = "<group>";
 		};
+		DEF31DB72D967A3600B67B30 /* ProductButton */ = {
+			isa = PBXGroup;
+			children = (
+				DEDD4C9A2D95364C00DC24F6 /* PaygateProductButton.swift */,
+				DEF31DB82D967AF400B67B30 /* PaygateLifetimeButton.swift */,
+				DEF31DBA2D967AFE00B67B30 /* PaygateSubscriptionButton.swift */,
+			);
+			path = ProductButton;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2319,7 +2321,6 @@
 				DEDD4D822D95364C00DC24F6 /* GetTestResponseMapper.swift in Sources */,
 				DEDD4D832D95364C00DC24F6 /* CircleProgressView.swift in Sources */,
 				DEDD4D842D95364C00DC24F6 /* MainView.swift in Sources */,
-				DEDD4D852D95364C00DC24F6 /* PaygateEnableTrialButton.swift in Sources */,
 				DEDD4D862D95364C00DC24F6 /* StepCollectionView.swift in Sources */,
 				DEDD4D872D95364C00DC24F6 /* QuestionTableElement.swift in Sources */,
 				DEDD4D882D95364C00DC24F6 /* NoMissedQuestionsView.swift in Sources */,
@@ -2351,7 +2352,6 @@
 				DEDD4DA22D95364C00DC24F6 /* PlanTest.swift in Sources */,
 				DEDD4DA32D95364C00DC24F6 /* QuestionManager.swift in Sources */,
 				DEDD4DA42D95364C00DC24F6 /* Review.swift in Sources */,
-				DEDD4DA52D95364C00DC24F6 /* PaygateBestOfferView.swift in Sources */,
 				DEDD4DA62D95364C00DC24F6 /* PaddingLabel.swift in Sources */,
 				DEDD4DA72D95364C00DC24F6 /* PracticeTableTestsCell.swift in Sources */,
 				DEDD4DA82D95364C00DC24F6 /* QuestionContentCollectionCell.swift in Sources */,
@@ -2412,13 +2412,13 @@
 				DEDD4DE02D95364C00DC24F6 /* ReviewFilterButton.swift in Sources */,
 				DEDD4DE12D95364C00DC24F6 /* StepCollectionElement.swift in Sources */,
 				DEDD4DE22D95364C00DC24F6 /* TestAnalytics.swift in Sources */,
-				DEDD4DE32D95364C00DC24F6 /* ProductPrice.swift in Sources */,
 				DEDD4DE42D95364C00DC24F6 /* CoursesViewModel.swift in Sources */,
 				DEDD4DE52D95364C00DC24F6 /* QuestionTableQuestionCell.swift in Sources */,
 				DEDD4DE62D95364C00DC24F6 /* ProfileMediator.swift in Sources */,
 				DEDD4DE72D95364C00DC24F6 /* PlanViewController.swift in Sources */,
 				DEDD4DE82D95364C00DC24F6 /* GradientView.swift in Sources */,
 				DEDD4DE92D95364C00DC24F6 /* Weak.swift in Sources */,
+				DEF31DB92D967AF400B67B30 /* PaygateLifetimeButton.swift in Sources */,
 				DEDD4DEA2D95364C00DC24F6 /* DayOfWeek.swift in Sources */,
 				DEDD4DEB2D95364C00DC24F6 /* OExamDateView.swift in Sources */,
 				DEDD4DEC2D95364C00DC24F6 /* ResetStatsRequest.swift in Sources */,
@@ -2500,6 +2500,7 @@
 				DEDD4E382D95364C00DC24F6 /* StepCollectionCell.swift in Sources */,
 				DEDD4E392D95364C00DC24F6 /* ObservableRetrySingle.swift in Sources */,
 				DEDD4E3A2D95364C00DC24F6 /* GetProfileResponseMapper.swift in Sources */,
+				DEF31DBB2D967AFE00B67B30 /* PaygateSubscriptionButton.swift in Sources */,
 				DEDD4E3B2D95364C00DC24F6 /* CustomTestAttributes.swift in Sources */,
 				DEDD4E3C2D95364C00DC24F6 /* QuestionTableQuestionReferenceCell.swift in Sources */,
 				DEDD4E3D2D95364C00DC24F6 /* GetTestsKitRequest.swift in Sources */,
@@ -2601,7 +2602,6 @@
 				DEDD4EA22D95364C00DC24F6 /* GetTestStatsRequest.swift in Sources */,
 				DEDD4EA32D95364C00DC24F6 /* Profile.swift in Sources */,
 				DEDD4EA42D95364C00DC24F6 /* StatsTableTitleCell.swift in Sources */,
-				DEDD4EA52D95364C00DC24F6 /* PaygateInfoView.swift in Sources */,
 				DEDD4EA62D95364C00DC24F6 /* NetworkError.swift in Sources */,
 				DEDD4EA72D95364C00DC24F6 /* CoursesTableCourseCell.swift in Sources */,
 				DEDD4EA82D95364C00DC24F6 /* SettingsView.swift in Sources */,
@@ -2665,9 +2665,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2GY8CB289H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EMT2thdplatform/Info.plist;
@@ -2682,8 +2682,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = akosnt17.EMT2thdplatform.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = sj.smartcloset;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -2700,9 +2701,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2GY8CB289H;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EMT2thdplatform/Info.plist;
@@ -2717,8 +2718,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = akosnt17.EMT2thdplatform.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = sj.smartcloset;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

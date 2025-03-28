@@ -11,7 +11,7 @@ final class PaygateInfoCell: UIView {
     lazy var imageView = makeImageView()
     lazy var label = makeLabel()
     
-    let text: String
+    private let text: String
     
     init(text: String) {
         self.text = text
@@ -38,14 +38,14 @@ private extension PaygateInfoCell {
 private extension PaygateInfoCell {
     func makeConstraints() {
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalToConstant: 12.scale),
-            imageView.heightAnchor.constraint(equalToConstant: 13.scale),
+            imageView.widthAnchor.constraint(equalToConstant: 10.scale),
+            imageView.heightAnchor.constraint(equalToConstant: 7.scale),
             imageView.trailingAnchor.constraint(equalTo: label.leadingAnchor, constant: -10.scale),
             imageView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 66.scale),
+            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 67.scale),
             label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.scale),
             label.topAnchor.constraint(equalTo: topAnchor),
             label.bottomAnchor.constraint(equalTo: bottomAnchor)
@@ -69,13 +69,12 @@ private extension PaygateInfoCell {
     func makeLabel() -> UILabel {
         let attrs = TextAttributes()
             .textColor(Appearance.mono200)
-            .font(Fonts.Inter.regular(size: ScreenSize.isIphoneXFamily ? 16.scale : 14.scale))
-            .lineHeight(ScreenSize.isIphoneXFamily ? 24.scale : 21.scale)
+            .font(Fonts.Inter.medium(size: 15.scale))
+            .lineHeight(23.scale)
             .textAlignment(.left)
-            .letterSpacing(-0.32.scale)
+            .letterSpacing(-0.14.scale)
         
         let view = UILabel()
-        view.numberOfLines = 2
         view.attributedText = text.attributed(with: attrs)
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
