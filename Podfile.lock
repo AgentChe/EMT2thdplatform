@@ -3,10 +3,6 @@ PODS:
   - Amplitude-iOS (4.10.0)
   - Kingfisher (8.3.1)
   - lottie-ios (4.5.1)
-  - MarqueeLabel (4.3.2)
-  - NotificationBannerSwift (3.2.1):
-    - MarqueeLabel (~> 4.3.0)
-    - SnapKit (~> 5.6.0)
   - OtterScaleiOS (1.26)
   - RxCocoa (6.9.0):
     - RxRelay (= 6.9.0)
@@ -14,7 +10,6 @@ PODS:
   - RxRelay (6.9.0):
     - RxSwift (= 6.9.0)
   - RxSwift (6.9.0)
-  - SnapKit (5.6.0)
   - SwiftyStoreKit (0.16.1)
 
 DEPENDENCIES:
@@ -22,7 +17,6 @@ DEPENDENCIES:
   - Amplitude-iOS
   - Kingfisher
   - lottie-ios
-  - NotificationBannerSwift
   - OtterScaleiOS (from `https://github.com/AgentChe/OtterScaleiOS.git`)
   - RxCocoa
   - RxSwift
@@ -34,12 +28,9 @@ SPEC REPOS:
     - Amplitude-iOS
     - Kingfisher
     - lottie-ios
-    - MarqueeLabel
-    - NotificationBannerSwift
     - RxCocoa
     - RxRelay
     - RxSwift
-    - SnapKit
     - SwiftyStoreKit
 
 EXTERNAL SOURCES:
@@ -56,15 +47,12 @@ SPEC CHECKSUMS:
   Amplitude-iOS: 7d8cdc3408ba35c2e68368fc7c692cd104606b94
   Kingfisher: 3204d23de16b5ea53541c44ca5a8efb55741dec3
   lottie-ios: 248b380fa1b97d18e792c37d90da7ab2aa0d6562
-  MarqueeLabel: 15e524a6762552bb279cb17438b8a94990269fb9
-  NotificationBannerSwift: dce54ded532b26e30cd8e7f4d80e124a0f2ba7d1
   OtterScaleiOS: 7797bb943c69572cd25a6118939ddb7c4684f03c
   RxCocoa: ac16414696ae706516be3e1ab00fcce5bdc9be8a
   RxRelay: 6b0c930e5cef57d5fe2032571e5e65b78e3cbdb1
   RxSwift: 31649ace6aceeb422e16ff71c60804f9c3281ed9
-  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftyStoreKit: 6b9c08810269f030586dac1fae8e75871a82e84a
 
-PODFILE CHECKSUM: 3ff810e3b24a5aec8293963d39baf1a317fd706a
+PODFILE CHECKSUM: bfff4ff826227c97775bdc8666b3a42a81283969
 
 COCOAPODS: 1.16.2

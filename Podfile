@@ -5,7 +5,6 @@ use_frameworks!
 source 'https://github.com/CocoaPods/Specs.git'
 
 target 'EMT2thdplatform' do
-  pod 'NotificationBannerSwift'
   pod 'lottie-ios'
   pod 'Kingfisher'
   
