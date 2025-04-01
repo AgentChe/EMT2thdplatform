@@ -21,9 +21,8 @@ final class GlobalDefinitions {
     static let privacyPolicyUrl = URL(string: "https://apps-by-konstantin.com/policy")!
     static let contactUsUrl = URL(string: "https://apps-by-konstantin.com/contact")!
     
-    // TODO
     enum Paygate {
-        static let lifetime = "smartcloset.yearly"
-        static let subscription = "smartcloset.weekly"
+        static let lifetime = "prep.exams.emt.lifetime"
+        static let subscription = "prep.exams.emt.monthly"
     }
 }
