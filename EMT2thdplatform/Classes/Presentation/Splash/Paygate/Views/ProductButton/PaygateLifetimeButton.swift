@@ -24,14 +24,14 @@ final class PaygateLifetimeButton: PaygateProductButton {
     
     private lazy var periodPriceAttrs = TextAttributes()
         .textColor(Appearance.mono200)
-        .font(Fonts.Inter.semiBold(size: 22.scale))
-        .lineHeight(31.scale)
+        .font(Fonts.Inter.semiBold(size: 20.scale))
+        .lineHeight(29.scale)
         .letterSpacing(-0.44.scale)
         .textAlignment(.left)
     private lazy var periodAttrs = TextAttributes()
         .textColor(Appearance.mono200)
-        .font(Fonts.Inter.medium(size: 12.scale))
-        .lineHeight(31.scale)
+        .font(Fonts.Inter.medium(size: 10.scale))
+        .lineHeight(29.scale)
         .letterSpacing(-0.14.scale)
         .textAlignment(.left)
     private lazy var discountAttrs = TextAttributes()
@@ -169,13 +169,13 @@ extension PaygateLifetimeButton.Product {
         lifetimeIAPProduct: IAPProduct,
         subscriptionIAPProduct: IAPProduct
     ) -> PaygateLifetimeButton.Product {
-        let periodPrice = Currency(iapProduct: lifetimeIAPProduct, div: 12).formatted() ?? ""
+        let periodPrice = Currency(iapProduct: lifetimeIAPProduct, div: 52).formatted() ?? ""
         
         let discount: Int = {
             let lifetimePriceValue = lifetimeIAPProduct.original.price.doubleValue
             let subscriptionPriceValue = subscriptionIAPProduct.original.price.doubleValue
             
-            let periodPriceValue = lifetimePriceValue / 12
+            let periodPriceValue = lifetimePriceValue / 52
             
             let diff = subscriptionPriceValue - periodPriceValue
             let discount = 100 / (subscriptionPriceValue / diff)

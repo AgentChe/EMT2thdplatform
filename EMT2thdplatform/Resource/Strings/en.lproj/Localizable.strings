@@ -105,7 +105,7 @@
 "Paygate.Info2" = "Train yourself with 10000+ questions";
 "Paygate.Info3" = "98% pass rate on the first attempt!";
 "Paygate.Lifetime.Title" = "Lifetime";
-"Paygate.Lifetime.Period" = "month";
+"Paygate.Lifetime.Period" = "week";
 "Paygate.Lifetime.InTerms" = "In terms of  1  year";
 "Paygate.Lifetime.Discount" = "SAVE %i%%";
 "Paygate.Lifetime.Once" = "once";

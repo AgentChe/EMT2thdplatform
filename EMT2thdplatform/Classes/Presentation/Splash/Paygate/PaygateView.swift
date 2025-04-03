@@ -51,10 +51,10 @@ private extension PaygateView {
         ])
         
         NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalToConstant: 191.scale),
-            imageView.heightAnchor.constraint(equalToConstant: 142.scale),
+            imageView.widthAnchor.constraint(equalToConstant: ScreenSize.isIphoneXFamily ? 191.scale : 160.scale),
+            imageView.heightAnchor.constraint(equalToConstant: ScreenSize.isIphoneXFamily ? 142.scale : 119.scale),
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 55.scale)
+            imageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: ScreenSize.isIphoneXFamily ? 55.scale : 28.scale)
         ])
         
         NSLayoutConstraint.activate([
@@ -66,7 +66,7 @@ private extension PaygateView {
         NSLayoutConstraint.activate([
             cell1.leadingAnchor.constraint(equalTo: leadingAnchor),
             cell1.trailingAnchor.constraint(equalTo: trailingAnchor),
-            cell1.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16.scale)
+            cell1.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: ScreenSize.isIphoneXFamily ? 16.scale : 8.scale)
         ])
         
         NSLayoutConstraint.activate([
@@ -84,21 +84,21 @@ private extension PaygateView {
         NSLayoutConstraint.activate([
             lifetimeButton.widthAnchor.constraint(equalToConstant: 161.scale),
             lifetimeButton.heightAnchor.constraint(equalToConstant: 185.scale),
-            lifetimeButton.topAnchor.constraint(equalTo: cell3.bottomAnchor, constant: 24.scale),
+            lifetimeButton.topAnchor.constraint(equalTo: cell3.bottomAnchor, constant: ScreenSize.isIphoneXFamily ? 24.scale : 12.scale),
             lifetimeButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20.scale)
         ])
         
         NSLayoutConstraint.activate([
             subscriptionButton.widthAnchor.constraint(equalToConstant: 161.scale),
             subscriptionButton.heightAnchor.constraint(equalToConstant: 185.scale),
-            subscriptionButton.topAnchor.constraint(equalTo: cell3.bottomAnchor, constant: 24.scale),
+            subscriptionButton.topAnchor.constraint(equalTo: cell3.bottomAnchor, constant: ScreenSize.isIphoneXFamily ? 24.scale : 12.scale),
             subscriptionButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20.scale)
         ])
         
         NSLayoutConstraint.activate([
             buyButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 29.scale),
             buyButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -29.scale),
-            buyButton.topAnchor.constraint(equalTo: lifetimeButton.bottomAnchor, constant: 20.scale),
+            buyButton.topAnchor.constraint(equalTo: lifetimeButton.bottomAnchor, constant: ScreenSize.isIphoneXFamily ? 20.scale : 16.scale),
             buyButton.heightAnchor.constraint(equalToConstant: 48.scale)
         ])
         
