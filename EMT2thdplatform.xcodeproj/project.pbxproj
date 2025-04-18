@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A33EB2ED04B13F7284C64DF5 /* Pods_EMT2thdplatform.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB88E306851BCCBD6C7043B /* Pods_EMT2thdplatform.framework */; };
+		DE93B5F02DB253780072A6AD /* RequestReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE93B5EF2DB253780072A6AD /* RequestReview.swift */; };
 		DEDD4B902D9534EF00DC24F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEDD4B872D9534EF00DC24F6 /* Assets.xcassets */; };
 		DEDD4B922D9534EF00DC24F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEDD4B8A2D9534EF00DC24F6 /* LaunchScreen.storyboard */; };
 		DEDD4D722D95364C00DC24F6 /* Onboarding.Start.json in Resources */ = {isa = PBXBuildFile; fileRef = DEDD4C792D95364C00DC24F6 /* Onboarding.Start.json */; };
@@ -301,7 +302,6 @@
 		DEDD4E9C2D95364C00DC24F6 /* ContentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4BBA2D95364C00DC24F6 /* ContentError.swift */; };
 		DEDD4E9D2D95364C00DC24F6 /* TextAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4BC32D95364C00DC24F6 /* TextAttributes.swift */; };
 		DEDD4E9E2D95364C00DC24F6 /* PaygateProductButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4C9A2D95364C00DC24F6 /* PaygateProductButton.swift */; };
-		DEDD4E9F2D95364C00DC24F6 /* TestRateUs.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4CCC2D95364C00DC24F6 /* TestRateUs.swift */; };
 		DEDD4EA02D95364C00DC24F6 /* StatsTablePassRateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4C5C2D95364C00DC24F6 /* StatsTablePassRateCell.swift */; };
 		DEDD4EA12D95364C00DC24F6 /* IAPProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4D312D95364C00DC24F6 /* IAPProduct.swift */; };
 		DEDD4EA22D95364C00DC24F6 /* GetTestStatsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDD4D682D95364C00DC24F6 /* GetTestStatsRequest.swift */; };
@@ -352,6 +352,7 @@
 /* Begin PBXFileReference section */
 		1AA3E7BDCE0293D65B743E8E /* Pods-EMT2thdplatform.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMT2thdplatform.release.xcconfig"; path = "Target Support Files/Pods-EMT2thdplatform/Pods-EMT2thdplatform.release.xcconfig"; sourceTree = "<group>"; };
 		C66925830E872AAF62C1C692 /* Pods-EMT2thdplatform.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMT2thdplatform.debug.xcconfig"; path = "Target Support Files/Pods-EMT2thdplatform/Pods-EMT2thdplatform.debug.xcconfig"; sourceTree = "<group>"; };
+		DE93B5EF2DB253780072A6AD /* RequestReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReview.swift; sourceTree = "<group>"; };
 		DEDD4B6E2D9534E900DC24F6 /* EMT2thdplatform.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EMT2thdplatform.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDD4B872D9534EF00DC24F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEDD4B882D9534EF00DC24F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -571,7 +572,6 @@
 		DEDD4CC72D95364C00DC24F6 /* TestType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestType.swift; sourceTree = "<group>"; };
 		DEDD4CC92D95364C00DC24F6 /* TestCloseMediator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCloseMediator.swift; sourceTree = "<group>"; };
 		DEDD4CCA2D95364C00DC24F6 /* TestCloseObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCloseObserver.swift; sourceTree = "<group>"; };
-		DEDD4CCC2D95364C00DC24F6 /* TestRateUs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRateUs.swift; sourceTree = "<group>"; };
 		DEDD4CCE2D95364C00DC24F6 /* AVPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
 		DEDD4CD02D95364C00DC24F6 /* QuestionContentCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionContentCollectionCell.swift; sourceTree = "<group>"; };
 		DEDD4CD12D95364C00DC24F6 /* QuestionContentCollectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionContentCollectionType.swift; sourceTree = "<group>"; };
@@ -863,6 +863,7 @@
 				DEDD4BC32D95364C00DC24F6 /* TextAttributes.swift */,
 				DEDD4BC42D95364C00DC24F6 /* Weak.swift */,
 				DEDD4BC52D95364C00DC24F6 /* XOREncryption.swift */,
+				DE93B5EF2DB253780072A6AD /* RequestReview.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1641,14 +1642,6 @@
 			path = Observer;
 			sourceTree = "<group>";
 		};
-		DEDD4CCD2D95364C00DC24F6 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				DEDD4CCC2D95364C00DC24F6 /* TestRateUs.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		DEDD4CCF2D95364C00DC24F6 /* Atoms */ = {
 			isa = PBXGroup;
 			children = (
@@ -1717,7 +1710,6 @@
 			children = (
 				DEDD4CC82D95364C00DC24F6 /* Model */,
 				DEDD4CCB2D95364C00DC24F6 /* Observer */,
-				DEDD4CCD2D95364C00DC24F6 /* Utils */,
 				DEDD4CE32D95364C00DC24F6 /* Views */,
 				DEDD4CE42D95364C00DC24F6 /* TestView.swift */,
 				DEDD4CE52D95364C00DC24F6 /* TestViewController.swift */,
@@ -2427,6 +2419,7 @@
 				DEDD4DF22D95364C00DC24F6 /* TestCloseMediator.swift in Sources */,
 				DEDD4DF32D95364C00DC24F6 /* ImageScrollView.swift in Sources */,
 				DEDD4DF52D95364C00DC24F6 /* OWhyView.swift in Sources */,
+				DE93B5F02DB253780072A6AD /* RequestReview.swift in Sources */,
 				DEDD4DF62D95364C00DC24F6 /* StudyModeView.swift in Sources */,
 				DEDD4DF72D95364C00DC24F6 /* PlanHeaderView.swift in Sources */,
 				DEDD4DF82D95364C00DC24F6 /* ObservableAndSingle+Extension.swift in Sources */,
@@ -2593,7 +2586,6 @@
 				DEDD4E9C2D95364C00DC24F6 /* ContentError.swift in Sources */,
 				DEDD4E9D2D95364C00DC24F6 /* TextAttributes.swift in Sources */,
 				DEDD4E9E2D95364C00DC24F6 /* PaygateProductButton.swift in Sources */,
-				DEDD4E9F2D95364C00DC24F6 /* TestRateUs.swift in Sources */,
 				DEDD4EA02D95364C00DC24F6 /* StatsTablePassRateCell.swift in Sources */,
 				DEDD4EA12D95364C00DC24F6 /* IAPProduct.swift in Sources */,
 				DEDD4EA22D95364C00DC24F6 /* GetTestStatsRequest.swift in Sources */,
@@ -2663,7 +2655,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = RWST5PC946;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -2679,7 +2671,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = prep.exams.emt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2702,7 +2694,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = RWST5PC946;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -2718,7 +2710,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = prep.exams.emt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
