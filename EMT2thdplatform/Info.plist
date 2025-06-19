@@ -12,7 +12,21 @@
 				<string>examsemt</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1266059688241848</string>
+			</array>
+		</dict>
 	</array>
+	<key>FacebookAppID</key>
+	<string>1266059688241848</string>
+	<key>FacebookClientToken</key>
+	<string>1260905e58e535182b46f88db5844a83</string>
+	<key>FacebookDisplayName</key>
+	<string>Exams: EMT</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Inter-Regular.ttf</string>

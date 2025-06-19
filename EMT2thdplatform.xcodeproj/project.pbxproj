@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A33EB2ED04B13F7284C64DF5 /* Pods_EMT2thdplatform.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFB88E306851BCCBD6C7043B /* Pods_EMT2thdplatform.framework */; };
+		DE0CC7002E0474E300379021 /* FacebookManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0CC6FF2E0474E300379021 /* FacebookManager.swift */; };
 		DE93B5F02DB253780072A6AD /* RequestReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE93B5EF2DB253780072A6AD /* RequestReview.swift */; };
 		DEDD4B902D9534EF00DC24F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEDD4B872D9534EF00DC24F6 /* Assets.xcassets */; };
 		DEDD4B922D9534EF00DC24F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEDD4B8A2D9534EF00DC24F6 /* LaunchScreen.storyboard */; };
@@ -352,6 +353,7 @@
 /* Begin PBXFileReference section */
 		1AA3E7BDCE0293D65B743E8E /* Pods-EMT2thdplatform.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMT2thdplatform.release.xcconfig"; path = "Target Support Files/Pods-EMT2thdplatform/Pods-EMT2thdplatform.release.xcconfig"; sourceTree = "<group>"; };
 		C66925830E872AAF62C1C692 /* Pods-EMT2thdplatform.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EMT2thdplatform.debug.xcconfig"; path = "Target Support Files/Pods-EMT2thdplatform/Pods-EMT2thdplatform.debug.xcconfig"; sourceTree = "<group>"; };
+		DE0CC6FF2E0474E300379021 /* FacebookManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookManager.swift; sourceTree = "<group>"; };
 		DE93B5EF2DB253780072A6AD /* RequestReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestReview.swift; sourceTree = "<group>"; };
 		DEDD4B6E2D9534E900DC24F6 /* EMT2thdplatform.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EMT2thdplatform.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDD4B872D9534EF00DC24F6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -768,6 +770,7 @@
 			isa = PBXGroup;
 			children = (
 				DEDD4B982D95364C00DC24F6 /* AmplitudeManager.swift */,
+				DE0CC6FF2E0474E300379021 /* FacebookManager.swift */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -2450,6 +2453,7 @@
 				DEDD4E0D2D95364C00DC24F6 /* PracticeTestButton.swift in Sources */,
 				DEDD4E0E2D95364C00DC24F6 /* FinishTestRequest.swift in Sources */,
 				DEDD4E0F2D95364C00DC24F6 /* RestAPITransport.swift in Sources */,
+				DE0CC7002E0474E300379021 /* FacebookManager.swift in Sources */,
 				DEDD4E102D95364C00DC24F6 /* Spinner.swift in Sources */,
 				DEDD4E112D95364C00DC24F6 /* SyncTokensRequest.swift in Sources */,
 				DEDD4E122D95364C00DC24F6 /* NumberLaunches.swift in Sources */,
@@ -2659,13 +2663,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = RWST5PC946;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EMT2thdplatform/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "NREMT Prep";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We use activity data to show more relevant ads.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -2675,7 +2680,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = prep.exams.emt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2698,13 +2703,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = RWST5PC946;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EMT2thdplatform/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "NREMT Prep";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We use activity data to show more relevant ads.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -2714,7 +2720,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.8;
+				MARKETING_VERSION = 1.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = prep.exams.emt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
